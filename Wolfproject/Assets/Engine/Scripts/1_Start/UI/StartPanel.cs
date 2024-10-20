@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartPanel : MonoBehaviour
@@ -20,7 +19,7 @@ public class StartPanel : MonoBehaviour
 
     public void Button_Start()
     {
-        SceneManager.LoadScene("MainScene");
+        GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_PLAY);
     }
 
     public void Button_Method()

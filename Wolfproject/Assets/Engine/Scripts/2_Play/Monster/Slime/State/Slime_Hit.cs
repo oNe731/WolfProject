@@ -10,15 +10,34 @@ public class Slime_Hit : Slime_Base
 
     public override void Enter_State()
     {
-        /*
-         * 기본 정보
-약점: 번개 속성에 약함.
-저항: 화염 속성에 강함.
+        //Debug.Log("피격");
 
-         * Hit (피격 상태)
-행동: 체력이 절반 이하로 떨어지면 속도가 빨라지고 공격 빈도가 높아짐.
-전환 조건: 일정 확률로 광폭화(Berserk) 상태로 전환.
-         */
+        // 플레이어 공격 타입
+        Player player = GameManager.Ins.Play.Player;
+        switch (player.AttributeType)
+        {
+            case Player.ATTRIBUTETYPE.AT_FIRE: // 화염 속성에 강함
+                m_owner.Damaged_Monster(player.Damage * 0.5f);
+                break;
+
+            case Player.ATTRIBUTETYPE.AT_THUNDER: // 번개 속성에 약함
+                m_owner.Damaged_Monster(player.Damage * 1.5f);
+                break;
+        }
+
+        if (m_owner.Hp <= m_owner.HpMax / 2)
+        {
+            // 일정 확률로 광폭화 상태로 변환
+            int index = Random.Range(0, 2);
+            if (index == 0)
+                m_stateMachine.Change_State((int)Slime.STATE.ST_BERSERK);
+            else
+                m_stateMachine.Change_State((int)Slime.STATE.ST_IDLE);
+        }
+        else
+        {
+            m_stateMachine.Change_State((int)Slime.STATE.ST_IDLE);
+        }
     }
 
     public override void Update_State()

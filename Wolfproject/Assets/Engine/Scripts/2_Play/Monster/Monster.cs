@@ -8,8 +8,10 @@ public class Monster : MonoBehaviour
     protected float m_hp;
     protected float m_hpMax;
 
-    private float m_speed;
-    private float m_speedMax;
+    protected float m_speed;
+    protected float m_speedMax;
+
+    protected float m_damage;
 
     protected StateMachine<Monster> m_stateMachine;
     protected int m_dieIndex = -1;
@@ -22,23 +24,35 @@ public class Monster : MonoBehaviour
     private Material m_whiteFlashMat;
     private Coroutine m_whiteCoroutine = null;
 
+    public float Hp { get => m_hp; }
+    public float HpMax { get => m_hpMax; }
     public float Speed { get => m_speed; set => m_speed = value; }
-    public float SpeedMax { get => m_speedMax; }
+    public float SpeedMax { get => m_speedMax; set => m_speed = value; }
+    public float Damage { get => m_damage; }
     public bool IsKnockedBack { get => m_isKnockedBack; }
 
     private Rigidbody2D m_rigidbody2D;
     private SpriteRenderer m_spriteRenderer;
+    private Collider2D m_collider2D;
+    private Animator m_animator;
+
+    private Spawner m_spawner;
+    public Spawner spawner { get => m_spawner; set => m_spawner = value; }
+    public Rigidbody2D Rigidbody2D { get => m_rigidbody2D; }
+    public Collider2D Collider2D { get => m_collider2D; }
+    public Animator Animator { get => m_animator; }
 
     public void Damaged_Monster(float damage, bool knockedBack = true)
     {
+        if (m_stateMachine.CurState == m_dieIndex)
+            return;
+
         m_hp -= damage;
         if (m_hp <= 0)
         {
             m_hp = 0;
-            //if(m_dieIndex != -1)
-            //    m_stateMachine.Change_State(m_dieIndex);
-
-            Destroy(gameObject);
+            if(m_dieIndex != -1)
+                m_stateMachine.Change_State(m_dieIndex);
         }
         else
         {
@@ -90,12 +104,22 @@ public class Monster : MonoBehaviour
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_defaultMat = m_spriteRenderer.material;
+        m_collider2D = GetComponent<Collider2D>();
+        m_animator = GetComponent<Animator>();
 
         m_whiteFlashMat = GameManager.Ins.Load<Material>("5_Material/MonsterMaterial");
     }
 
-    void Update()
+    private void Update()
     {
         
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (m_stateMachine == null)
+            return;
+
+        m_stateMachine.OnDrawGizmos();
     }
 }

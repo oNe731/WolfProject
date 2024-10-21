@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Slider[] m_staminaSliders;
     [SerializeField] private Joystick m_joystick;
     [SerializeField] private UIBlood uiBlood;
+    [SerializeField] private Inventory m_inventory;
 
     [SerializeField] private Image[] m_buttonImage;
     [SerializeField] private Sprite[] m_buttonSprite;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     private float m_hpMax;
     private float m_stamina;
     private float m_staminaMax;
+    private float m_damage;
 
     private ATTRIBUTETYPE m_attributeType = ATTRIBUTETYPE.AT_FIRE;
     private float m_moveSpeed = 5f;
@@ -37,6 +39,10 @@ public class Player : MonoBehaviour
 
     private bool m_attackCool = false;
 
+    private bool m_isSturn = false;
+    private float m_isSturnTime = 0f;
+    private float m_sturnTime = 0f;
+
     private StateMachine<Player> m_stateMachine;
 
     private SpriteRenderer m_sr;
@@ -45,11 +51,13 @@ public class Player : MonoBehaviour
 
     public float Stamina => m_stamina;
     public ATTRIBUTETYPE AttributeType => m_attributeType;
+    public float Damage { get => m_damage; }
     public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = value; }
     public bool Invincibility { get => m_invincibility; set => m_invincibility = value; }
     public bool Dash { get => m_dash; set => m_dash = value; }
     public bool DashCool { get => m_dashCool; set => m_dashCool = value; }
     public bool AttackCool { get => m_attackCool; set => m_attackCool = value; }
+    public Inventory Inven => m_inventory;
     public Image[] ButtonImage { get => m_buttonImage; }
     public Joystick Joystick => m_joystick;
     public SpriteRenderer Sr => m_sr;
@@ -101,6 +109,8 @@ public class Player : MonoBehaviour
         m_staminaSlider = m_staminaSliders[0].GetComponent<UISliderOwner>();
         Set_StaminaSlider();
 
+        m_damage = 2f;
+
         m_sr = GetComponent<SpriteRenderer>();
         m_rb = GetComponent<Rigidbody2D>();
         m_am = GetComponent<Animator>();
@@ -120,15 +130,27 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        m_stateMachine.Update_State();
-
         if (m_recover == true)
             Recover_Stamina();
+
+        if(m_isSturn == true)
+        {
+            m_sturnTime += Time.deltaTime;
+            if(m_sturnTime >= m_isSturnTime)
+            {
+                m_sturnTime = 0f;
+                m_isSturn = false;
+                Debug.Log("스턴 종료");
+            }
+            return;
+        }
+
+        m_stateMachine.Update_State();
     }
 
     public void Attack_Player(ATTACKTYPE attackType)
     {
-        if (m_attackCool == true)
+        if (m_attackCool == true || m_isSturn == true)
             return;
 
         switch (attackType)
@@ -148,7 +170,10 @@ public class Player : MonoBehaviour
 
     public void Change_AttributeType()
     {
-        switch(m_attributeType)
+        if (m_isSturn == true)
+            return;
+
+        switch (m_attributeType)
         {
             case ATTRIBUTETYPE.AT_FIRE:
                 m_attributeType = ATTRIBUTETYPE.AT_THUNDER;
@@ -168,7 +193,7 @@ public class Player : MonoBehaviour
 
     public void Dash_Player()
     {
-        if (m_dash == true || m_dashCool == true || m_stamina < 10f)
+        if (m_dash == true || m_dashCool == true || m_stamina < 10f || m_isSturn == true)
             return;
 
         Use_Stamina(10f);
@@ -214,6 +239,17 @@ public class Player : MonoBehaviour
         else
             color = new Color(0.3603774f, 0.5231216f, 1f, 1f); // 파란색
         m_staminaSlider.FillImage.color = color;
+    }
+
+
+    public void Start_Sturn(float time)
+    {
+        m_isSturn = true;
+        m_sturnTime = 0f;
+        m_isSturnTime = time;
+
+        m_rb.velocity = Vector2.zero;
+        Debug.Log("스턴 시작");
     }
 
     private void OnDrawGizmos()

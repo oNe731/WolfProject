@@ -4,26 +4,12 @@ using UnityEngine;
 
 public class ItemShield : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Triger_Event()
     {
-        // 터치로 사용
+        ItemData itemData = new ItemData();
+        itemData.itemType = ItemData.TYPE.IT_SHIELD;
+        itemData.count = 1;
 
-        /*
-         * 
-         * # 방어막 아이템:
-         * 방어막: 없음
-         * 10초 동안 방어막이 체력보다 우선 적용.
-         * 쿨다운: 15초
-         * 방어막 기본값 없음 (디폴트).
-         * 기본적으로 체력보다 우선적으로 적용되는 방어막은 아이템 사용 후에만 활성화됨.
-         * 방어막이 없을 때는 적의 공격을 직접 체력에 적용.
-         */
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.Ins.Play.Player.Inven.Add_Item(itemData);
     }
 }

@@ -34,12 +34,20 @@ public class Spawner : MonoBehaviour
             for (int j = 0; j < m_monsterCount[i]; j++)
             {
                 Vector2 spawnPosition = Get_RandomPosition();
-                Instantiate(gameObject, spawnPosition, Quaternion.identity, transform);
+                GameObject obj = Instantiate(gameObject, spawnPosition, Quaternion.identity, transform);
+                if (obj != null)
+                {
+                    Monster monster = obj.GetComponent<Monster>();
+                    if (monster != null)
+                    {
+                        monster.spawner = this;
+                    }
+                }
             }
         }
     }
 
-    private Vector2 Get_RandomPosition()
+    public Vector2 Get_RandomPosition()
     {
         // 박스 콜라이더의 바운드 영역
         Bounds bounds = m_boxCollider.bounds;

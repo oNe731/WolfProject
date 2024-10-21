@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class Slime_Die : Slime_Base
 {
+    private float m_time = 0f;
+
     public Slime_Die(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter_State()
     {
+        m_owner.Animator.SetBool("Is_Dead", true);
+        //Debug.Log("»ç¸Á");
     }
 
     public override void Update_State()
     {
+        if (m_owner.Animator.IsInTransition(0) == true)
+            return;
+        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Dead") == true)
+            m_owner.Animator.SetBool("Is_Dead", false);
+
+        m_time += Time.deltaTime;
+        if(m_time > 0.5f)
+        {
+            GameManager.Ins.Destroy(m_owner.gameObject);
+        }
     }
 
     public override void Exit_State()

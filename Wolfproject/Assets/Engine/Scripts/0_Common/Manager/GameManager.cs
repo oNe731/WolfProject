@@ -99,5 +99,13 @@ public class GameManager : MonoBehaviour
 
         return Instantiate(prefab, transform);
     }
+
+    public void Destroy(GameObject gameObject)
+    {
+        if (gameObject == null)
+            return;
+
+        Object.Destroy(gameObject);
+    }
     #endregion
 }

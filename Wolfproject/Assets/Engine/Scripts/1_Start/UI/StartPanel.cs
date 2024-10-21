@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartPanel : MonoBehaviour
 {
+    [SerializeField] private string[] m_titleName;
     [SerializeField] private Sprite[] m_methodSprite;
+    [SerializeField] private Sprite[] m_buttonSprite;
     [SerializeField] private GameObject m_methodPanel;
-    [SerializeField] private GameObject[] m_indexButton;
+
+    private Image[] m_indexButton;
+    private TMP_Text m_titleText;
 
     private int m_currentIndex = 0;
     private Image m_methodImage;
@@ -15,6 +20,11 @@ public class StartPanel : MonoBehaviour
     private void Start()
     {
         m_methodImage = m_methodPanel.transform.GetChild(0).GetComponent<Image>();
+        m_titleText = m_methodPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+
+        m_indexButton = new Image[2];
+        m_indexButton[0] = m_methodPanel.transform.GetChild(2).GetComponent<Image>();
+        m_indexButton[1] = m_methodPanel.transform.GetChild(3).GetComponent<Image>();
     }
 
     public void Button_Start()
@@ -22,8 +32,11 @@ public class StartPanel : MonoBehaviour
         GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_PLAY);
     }
 
-    public void Button_Method()
+    public void Button_Method(bool start)
     {
+        if (start == true)
+            m_currentIndex = 0;
+
         m_methodImage.sprite = m_methodSprite[m_currentIndex];
         m_methodPanel.SetActive(true);
 
@@ -47,6 +60,8 @@ public class StartPanel : MonoBehaviour
             else
                 Set_ButtonsActive(true, true);
         }
+
+        m_titleText.text = m_titleName[m_currentIndex];
     }
 
     private void Set_ButtonsActive(bool leftActive, bool rightActive)
@@ -54,8 +69,15 @@ public class StartPanel : MonoBehaviour
         if (m_indexButton.Length < 2)
             return;
 
-        m_indexButton[0].SetActive(leftActive);  // 왼쪽 버튼
-        m_indexButton[1].SetActive(rightActive); // 오른쪽 버튼
+        if (leftActive == true) // 왼쪽 버튼
+            m_indexButton[0].sprite = m_buttonSprite[1];
+        else
+            m_indexButton[0].sprite = m_buttonSprite[0];
+
+        if (rightActive == true) // 오른쪽 버튼
+            m_indexButton[1].sprite = m_buttonSprite[1];
+        else
+            m_indexButton[1].sprite = m_buttonSprite[0];
     }
 
     public void Button_NextMethod()
@@ -63,7 +85,7 @@ public class StartPanel : MonoBehaviour
         if (m_currentIndex < m_methodSprite.Length - 1)
         {
             m_currentIndex++;
-            Button_Method();
+            Button_Method(false);
         }
     }
 
@@ -72,7 +94,7 @@ public class StartPanel : MonoBehaviour
         if (m_currentIndex > 0)
         {
             m_currentIndex--;
-            Button_Method();
+            Button_Method(false);
         }
     }
 

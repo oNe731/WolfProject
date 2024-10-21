@@ -4,21 +4,33 @@ using UnityEngine;
 
 public class Slime_Chase : Slime_Base
 {
+    private float m_distance = 1f;
+
     public Slime_Chase(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
     }
 
     public override void Enter_State()
     {
-        /*
-        Chase (추격 상태)
-행동: 슬라임이 직선으로 느리게 플레이어를 추격하며, 장애물을 넘기 위해 주기적으로 점프함.
-전환 조건: 일정 시간 후 플레이어와의 거리 좁힘 시 **Jump Attack(점프 공격 상태)**으로 전환.
-         */
+        m_owner.SpeedMax = 4f;
+        m_owner.Speed = m_owner.SpeedMax;
+        m_owner.Animator.SetBool("Is_Chase", true);
+        //Debug.Log("추격");
     }
 
     public override void Update_State()
     {
+        if(Change_Attack() == false) // 거리에 따른 공격 상태 전환
+        {
+            // 플레이어 추격
+            Vector2 direction = ((Vector2)GameManager.Ins.Play.Player.transform.position - (Vector2)m_owner.transform.position).normalized;
+            m_owner.Rigidbody2D.MovePosition(m_owner.Rigidbody2D.position + direction * m_owner.Speed * Time.deltaTime);
+        }
+
+        if (m_owner.Animator.IsInTransition(0) == true)
+            return;
+        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Chase") == true)
+            m_owner.Animator.SetBool("Is_Chase", false);
     }
 
     public override void Exit_State()
@@ -27,5 +39,18 @@ public class Slime_Chase : Slime_Base
 
     public override void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(m_owner.transform.position, m_distance);
+    }
+
+    private bool Change_Attack()
+    {
+        if (Get_PlayerDistance() <= m_distance)
+        {
+            m_stateMachine.Change_State((int)Slime.STATE.ST_ATTACK);
+            return true;
+        }
+
+        return false;
     }
 }

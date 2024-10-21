@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class ItemHp : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Triger_Event()
     {
-        // 터치로 사용
+        ItemData itemData = new ItemData();
+        itemData.itemType = ItemData.TYPE.IT_HP;
+        itemData.count = 1;
 
-        /*
-         * # 체력 회복 아이템:
-         * 체력을 25% 회복.
-         * 쿨다운: 3초
-         */
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.Ins.Play.Player.Inven.Add_Item(itemData);
     }
 }

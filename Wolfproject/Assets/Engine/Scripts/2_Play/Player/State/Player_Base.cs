@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Base : State<Player>
 {
     protected Player m_owner;
+    protected float m_coolTime;
 
     public Player_Base(StateMachine<Player> stateMachine) : base(stateMachine)
     {

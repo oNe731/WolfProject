@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Slider[] m_staminaSliders;
     [SerializeField] private Joystick m_joystick;
     [SerializeField] private UIBlood uiBlood;
+
     [SerializeField] private Image[] m_buttonImage;
     [SerializeField] private Sprite[] m_buttonSprite;
 
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
     public bool Dash { get => m_dash; set => m_dash = value; }
     public bool DashCool { get => m_dashCool; set => m_dashCool = value; }
     public bool AttackCool { get => m_attackCool; set => m_attackCool = value; }
+    public Image[] ButtonImage { get => m_buttonImage; }
     public Joystick Joystick => m_joystick;
     public SpriteRenderer Sr => m_sr;
     public Rigidbody2D Rb => m_rb;

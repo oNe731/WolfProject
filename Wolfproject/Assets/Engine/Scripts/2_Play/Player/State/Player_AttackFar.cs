@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player_AttackFar : Player_Attack
 {
     private bool m_attack = false;
-    public Player_AttackFar(StateMachine<Player> stateMachine) : base(stateMachine)
+    public Player_AttackFar(StateMachine<Player> stateMachine) : base(stateMachine, 1)
     {
+        m_coolTime = 1f;
+
         m_animationName = "IsAttackFar";
     }
 

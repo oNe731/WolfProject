@@ -8,8 +8,10 @@ public class Player_AttackNear : Player_Attack
     private float m_distance = 1f;
     private BoxCollider2D m_attackCollider;
 
-    public Player_AttackNear(StateMachine<Player> stateMachine) : base(stateMachine)
+    public Player_AttackNear(StateMachine<Player> stateMachine) : base(stateMachine, 0)
     {
+        m_coolTime = 1f;
+
         m_animationName = "IsAttackNear";
         m_attackCollider = m_owner.transform.GetChild(1).GetComponent<BoxCollider2D>();
     }

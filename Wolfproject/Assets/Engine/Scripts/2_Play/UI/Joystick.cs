@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler// IPointerUpHandler, IPointerDownHandler
 {
     private float m_leverRange = 50f;
 
     private bool m_isInput;
-    private Vector2 m_inputVector;
+    private Vector2 m_inputVector = new Vector2(-1f, 0f);
 
     private RectTransform m_lever;
     private RectTransform m_rectTransform;

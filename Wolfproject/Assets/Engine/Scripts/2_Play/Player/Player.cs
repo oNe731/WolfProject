@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public enum STATE { ST_IDLE, ST_WALK, ST_DASH, ST_ATTACKNEAR, ST_ATTACKFAR, ST_HIT, ST_DIE, ST_END }
+    public enum STATE { ST_IDLE, ST_WALK, ST_DASH, ST_ATTACKNEAR, ST_ATTACKFAR, ST_HIT, ST_DIE, ST_END }    
     public enum ATTRIBUTETYPE { AT_FIRE, AT_THUNDER, AT_END }
     public enum ATTACKTYPE { AT_NEAR, AT_FAR, AT_END }
 
@@ -31,17 +31,26 @@ public class Player : MonoBehaviour
     private bool m_invincibility = false;
     private bool m_dash = false;
     private bool m_dashCool = false;
-    private Coroutine m_dashCoroutine = null;
 
     private bool m_attackCool = false;
-    private Coroutine m_attackCoroutine = null;
 
     private StateMachine<Player> m_stateMachine;
 
     private SpriteRenderer m_sr;
     private Rigidbody2D m_rb;
+    private Animator m_am;
 
+    public float Stamina => m_stamina;
+    public ATTRIBUTETYPE AttributeType => m_attributeType;
+    public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = value; }
+    public bool Invincibility { get => m_invincibility; set => m_invincibility = value; }
+    public bool Dash { get => m_dash; set => m_dash = value; }
+    public bool DashCool { get => m_dashCool; set => m_dashCool = value; }
+    public bool AttackCool { get => m_attackCool; set => m_attackCool = value; }
     public Joystick Joystick => m_joystick;
+    public SpriteRenderer Sr => m_sr;
+    public Rigidbody2D Rb => m_rb;
+    public Animator AM => m_am;
 
     public void Damaged_Player(float damage)
     {
@@ -52,7 +61,7 @@ public class Player : MonoBehaviour
         if(m_hp <= 0)
         {
             m_hp = 0;
-            GameManager.Ins.Play.Over_Game();
+            m_stateMachine.Change_State((int)STATE.ST_DIE);
         }
         else
         {
@@ -60,6 +69,7 @@ public class Player : MonoBehaviour
                 uiBlood.Start_Blood();
             else
                 uiBlood.Stop_Blood();
+            m_stateMachine.Change_State((int)STATE.ST_HIT);
         }
 
         m_hpSlider.Set_Slider(m_hp);
@@ -89,6 +99,7 @@ public class Player : MonoBehaviour
 
         m_sr = GetComponent<SpriteRenderer>();
         m_rb = GetComponent<Rigidbody2D>();
+        m_am = GetComponent<Animator>();
 
         // State
         m_stateMachine = new StateMachine<Player>(gameObject);
@@ -105,44 +116,15 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        m_stateMachine.Update_State();
+
         if (m_recover == true)
             Recover_Stamina();
 
         //if (Input.GetMouseButtonDown(0))
         //{
-        //    if (m_hp == 100)
-        //        Damaged_Player(90);
-        //    else
-        //        Damaged_Player(-90);
+        //    Damaged_Player(2);
         //}
-    }
-
-    private void FixedUpdate()
-    {
-        if (m_dash == true)
-            return;
-
-        if (m_joystick.IsInput == false)
-        {
-            m_rb.velocity = Vector2.zero;
-        }
-        else
-        {
-            if (m_stamina > 0)
-                m_moveSpeed = 5f; // 기본 이동 속도
-            else
-                m_moveSpeed = 5f * 0.8f; // 20% 감소
-            Move_Player(m_joystick.InputVector);
-        }
-    }
-
-    private void Move_Player(Vector2 direct)
-    {
-        m_rb.velocity = direct * m_moveSpeed;
-        if (m_joystick.InputVector.x < 0)
-            m_sr.flipX = false;
-        else if (m_joystick.InputVector.x > 0)
-            m_sr.flipX = true;
     }
 
     public void Attack_Player(ATTACKTYPE attackType)
@@ -150,49 +132,19 @@ public class Player : MonoBehaviour
         if (m_attackCool == true)
             return;
 
-        m_attackCool = true;
         switch (attackType)
         {
-            case ATTACKTYPE.AT_NEAR: // 근접 공격
-                // 근접 상태에서만 유효한 공격.
-                //*
-
+            case ATTACKTYPE.AT_NEAR:
+                m_stateMachine.Change_State((int)STATE.ST_ATTACKNEAR);
                 break;
 
-            case ATTACKTYPE.AT_FAR: // 원거리 공격
-                // 속성 공격 사용 중 스태미나가 없으면 공격 속도가 느려짐.
+            case ATTACKTYPE.AT_FAR:
                 if (m_stamina < 5)
                     return;
                 Use_Stamina(5f);
-
-                // 투사체 오브젝트 생성
-                GameObject gameObject = GameManager.Ins.LoadCreate("4_Prefab/1_Player/Projectile");
-                if(gameObject != null)
-                {
-                    Projectile projectile = gameObject.GetComponent<Projectile>();
-                    if (projectile != null)
-                        projectile.Start_Projectile(m_attributeType, m_joystick.InputVector);
-                }
+                m_stateMachine.Change_State((int)STATE.ST_ATTACKFAR);
                 break;
         }
-
-        // 쿨타임
-        if (m_attackCoroutine != null)
-            StopCoroutine(m_attackCoroutine);
-        m_attackCoroutine = StartCoroutine(CoolTime_Attack(1f));
-    }
-
-    private IEnumerator CoolTime_Attack(float waitTime)
-    {
-        float time = 0f;
-        while(time < 1f)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        m_attackCool = false;
-        yield break;
     }
 
     public void Change_AttributeType()
@@ -213,44 +165,11 @@ public class Player : MonoBehaviour
     {
         if (m_dash == true || m_dashCool == true || m_stamina < 10f)
             return;
+
         Use_Stamina(10f);
-
-        if (m_dashCoroutine != null)
-            StopCoroutine(m_dashCoroutine);
-        m_dashCoroutine = StartCoroutine(Move_Dash());
+        m_stateMachine.Change_State((int)STATE.ST_DASH);
     }
 
-    private IEnumerator Move_Dash()
-    {
-        m_dash = true;
-        m_invincibility = true; // 무적 상태 (적의 공격, 충돌 무시)
-
-        // 대쉬 이동
-        Vector2 direct = m_joystick.InputVector; // 조이스틱 입력 방향으로 대쉬
-        float time = 0;
-        m_moveSpeed = 10f; // 대쉬 이동 속도
-        while(time < 0.2f) // 대쉬 거리 3미터
-        {
-            time += Time.deltaTime;
-            Move_Player(direct);
-
-            yield return null;
-        }
-        m_rb.velocity = Vector2.zero;
-        m_dash = false;
-        m_invincibility = false;
-
-        // 대쉬 쿨타임
-        m_dashCool = true;
-        time = 0;
-        while (time < 1f) // 1초
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        m_dashCool = false;
-        yield break;
-    }
 
     private void Use_Stamina(float stamina)
     {
@@ -290,5 +209,13 @@ public class Player : MonoBehaviour
         else
             color = new Color(0.3603774f, 0.5231216f, 1f, 1f); // 파란색
         m_staminaSlider.FillImage.color = color;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (m_stateMachine == null)
+            return;
+
+        m_stateMachine.OnDrawGizmos();
     }
 }

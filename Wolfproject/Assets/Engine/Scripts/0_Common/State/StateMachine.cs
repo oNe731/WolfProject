@@ -72,9 +72,7 @@ public class StateMachine<T> where T : class
 
     public void OnDrawGizmos()
     {
-        if (m_curState == -1)
-            return;
-
-        m_states[(int)m_curState].OnDrawGizmos();
+        for(int i = 0; i < m_states.Count; ++i)
+            m_states[i].OnDrawGizmos();
     }
 }

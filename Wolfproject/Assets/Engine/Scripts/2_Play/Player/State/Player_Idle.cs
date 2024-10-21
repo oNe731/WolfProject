@@ -10,6 +10,8 @@ public class Player_Idle : Player_Base
 
     public override void Enter_State()
     {
+        // 애니메이션 변경
+        m_owner.AM.SetTrigger("IsIdle");
     }
 
     public override void Update_State()
@@ -17,6 +19,7 @@ public class Player_Idle : Player_Base
         if(m_owner.Joystick.IsInput == true)
         {
             m_stateMachine.Change_State((int)Player.STATE.ST_WALK);
+            return;
         }
     }
 

@@ -10,6 +10,7 @@ public class Player_Die : Player_Base
 
     public override void Enter_State()
     {
+        GameManager.Ins.Play.Over_Game();
     }
 
     public override void Update_State()

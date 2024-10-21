@@ -120,11 +120,6 @@ public class Player : MonoBehaviour
 
         if (m_recover == true)
             Recover_Stamina();
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Damaged_Player(2);
-        //}
     }
 
     public void Attack_Player(ATTACKTYPE attackType)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : Singleton<PlayerMovement>
+public class PlayerMovement : MonoBehaviour
 {
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
 
@@ -25,10 +25,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private bool facingLeft = false;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
-
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();

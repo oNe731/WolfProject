@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class InputButton : MonoBehaviour
 {
-    public void Button_Near() // 근접 공격
+    public void Button_Near() // 근접 공격 + 쿨
     {
         GameManager.Ins.Play.Player.Attack_Player(Player.ATTACKTYPE.AT_NEAR);
     }
 
-    public void Button_Far() // 원거리 공격
+    public void Button_Far() // 원거리 공격 + 쿨
     {
         GameManager.Ins.Play.Player.Attack_Player(Player.ATTACKTYPE.AT_FAR);
     }
@@ -19,7 +19,7 @@ public class InputButton : MonoBehaviour
         GameManager.Ins.Play.Player.Change_AttributeType();
     }
 
-    public void Button_Dash() // 대쉬
+    public void Button_Dash() // 대쉬 + 쿨
     {
         GameManager.Ins.Play.Player.Dash_Player();
     }

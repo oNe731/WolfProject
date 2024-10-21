@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Slider[] m_staminaSliders;
     [SerializeField] private Joystick m_joystick;
     [SerializeField] private UIBlood uiBlood;
+    [SerializeField] private Image[] m_buttonImage;
+    [SerializeField] private Sprite[] m_buttonSprite;
 
     private UISliderOwner m_hpSlider;
     private UISliderOwner m_staminaSlider;
@@ -148,10 +150,16 @@ public class Player : MonoBehaviour
         {
             case ATTRIBUTETYPE.AT_FIRE:
                 m_attributeType = ATTRIBUTETYPE.AT_THUNDER;
+                m_buttonImage[0].sprite = m_buttonSprite[0];
+                m_buttonImage[1].sprite = m_buttonSprite[2];
+                m_buttonImage[2].sprite = m_buttonSprite[4];
                 break;
 
             case ATTRIBUTETYPE.AT_THUNDER:
                 m_attributeType = ATTRIBUTETYPE.AT_FIRE;
+                m_buttonImage[0].sprite = m_buttonSprite[1];
+                m_buttonImage[1].sprite = m_buttonSprite[3];
+                m_buttonImage[2].sprite = m_buttonSprite[5];
                 break;
         }
     }

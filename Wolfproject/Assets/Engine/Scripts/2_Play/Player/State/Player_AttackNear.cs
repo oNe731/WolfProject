@@ -11,7 +11,7 @@ public class Player_AttackNear : Player_Attack
     public Player_AttackNear(StateMachine<Player> stateMachine) : base(stateMachine)
     {
         m_animationName = "IsAttackNear";
-        m_attackCollider = m_owner.transform.GetChild(0).GetComponent<BoxCollider2D>();
+        m_attackCollider = m_owner.transform.GetChild(1).GetComponent<BoxCollider2D>();
     }
 
     public override void Enter_State()

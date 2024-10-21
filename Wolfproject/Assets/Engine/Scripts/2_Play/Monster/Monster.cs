@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_END }
+
     protected float m_hp;
     protected float m_hpMax;
 
     private float m_speed;
     private float m_speedMax;
 
-    protected StateMachine<Player> m_stateMachine;
+    protected StateMachine<Monster> m_stateMachine;
     protected int m_dieIndex = -1;
     protected int m_hitIndex = -1;
 

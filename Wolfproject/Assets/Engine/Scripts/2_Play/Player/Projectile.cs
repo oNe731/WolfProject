@@ -17,16 +17,28 @@ public class Projectile : MonoBehaviour
 
     private bool m_isSuccess = false;
     private SpriteRenderer m_spriteRenderer;
+    private Animator m_animator;
 
     public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct)
     {
         m_player = GameManager.Ins.Play.Player;
         m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_animator = GetComponent<Animator>();
 
         m_type = type;
         m_direction = direct.normalized;
 
         transform.position = startPosition + (new Vector3(m_direction.x, m_direction.y, 0f) * 0.1f);
+        if (m_type == Player.ATTRIBUTETYPE.AT_FIRE)
+        {
+            m_animator.SetTrigger("IsFire");
+            GameManager.Ins.Play.Player.Play_AudioSource("Player_fire", false, 1f, 1f);
+        }
+        else if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
+        {
+            m_animator.SetTrigger("IsThunder");
+            GameManager.Ins.Play.Player.Play_AudioSource("Player_lightning", false, 1f, 1f);
+        }
     }
 
     void Update()
@@ -83,7 +95,8 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Enemy") == true)
         {
             m_isSuccess = true;
-            m_spriteRenderer.enabled = false;
+            //m_spriteRenderer.enabled = false;
+            m_animator.SetBool("IsBoom", true);
 
             m_monster = collision.gameObject.GetComponent<Monster>();
             if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)

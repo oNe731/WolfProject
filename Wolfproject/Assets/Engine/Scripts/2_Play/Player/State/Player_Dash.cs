@@ -34,6 +34,7 @@ public class Player_Dash : Player_Base
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         m_owner.AM.SetTrigger("IsDash");
+        m_owner.Play_AudioSource("Player_dash", false, 1f, 1f);
     }
 
     public override void Update_State()

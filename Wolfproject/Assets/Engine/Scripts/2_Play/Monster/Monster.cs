@@ -44,8 +44,7 @@ public class Monster : MonoBehaviour
 
     public void Damaged_Monster(float damage, bool knockedBack = true)
     {
-        if (m_stateMachine.CurState == m_dieIndex)
-            return;
+        Debug.Log(damage + "데미지 입음");
 
         m_hp -= damage;
         if (m_hp <= 0)
@@ -56,12 +55,12 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            if (m_hitIndex != -1)
-                m_stateMachine.Change_State(m_hitIndex);
+            //if (m_hitIndex != -1)
+            //    m_stateMachine.Change_State(m_hitIndex);
 
             // 넉백 적용
             if(knockedBack == true)
-                Start_KnockedBack(5f);
+                Start_KnockedBack(2f);
 
             // 메테리얼 변경
             if (m_whiteCoroutine != null)

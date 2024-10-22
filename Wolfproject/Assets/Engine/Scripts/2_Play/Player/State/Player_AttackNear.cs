@@ -57,6 +57,15 @@ public class Player_AttackNear : Player_Attack
 
     private void Check_AttackCollision(BoxCollider2D collider)
     {
+        m_owner.Play_AudioSource("Player_Melee", false, 1f, 1f);
+
+        // 이펙트 생성
+        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Attack");
+        if(obj != null)
+        {
+            obj.transform.position = new Vector3(m_owner.transform.position.x + Random.Range(-0.2f, 0.2f), m_owner.transform.position.y + Random.Range(-0.2f, 0.2f), m_owner.transform.position.z);
+        }
+
         // 특정 범위 안에 있는 모든 콜라이더를 가져옴 // OverlapCircle : 원 형태의 범위, 2D 물리 시스템
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(collider.transform.position, m_distance, LayerMask.GetMask("Monster"));
         foreach (Collider2D hitCollider in hitColliders)

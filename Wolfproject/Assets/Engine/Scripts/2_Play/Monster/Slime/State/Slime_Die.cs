@@ -12,6 +12,7 @@ public class Slime_Die : Slime_Base
 
     public override void Enter_State()
     {
+        m_owner.Rigidbody2D.velocity = Vector2.zero;
         m_owner.Animator.SetBool("Is_Dead", true);
         //Debug.Log("»ç¸Á");
     }

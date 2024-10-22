@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slime_Chase : Slime_Base
 {
-    private float m_distance = 1f;
+
 
     public Slime_Chase(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
@@ -39,18 +39,6 @@ public class Slime_Chase : Slime_Base
 
     public override void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(m_owner.transform.position, m_distance);
-    }
 
-    private bool Change_Attack()
-    {
-        if (Get_PlayerDistance() <= m_distance)
-        {
-            m_stateMachine.Change_State((int)Slime.STATE.ST_ATTACK);
-            return true;
-        }
-
-        return false;
     }
 }

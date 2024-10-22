@@ -18,6 +18,7 @@ public class Slime_Hit : Slime_Base
         {
             case Player.ATTRIBUTETYPE.AT_FIRE: // 화염 속성에 강함
                 m_owner.Damaged_Monster(player.Damage * 0.5f);
+  
                 break;
 
             case Player.ATTRIBUTETYPE.AT_THUNDER: // 번개 속성에 약함

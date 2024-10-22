@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer m_sr;
     private Rigidbody2D m_rb;
     private Animator m_am;
+    private AudioSource m_as;
 
     public float Stamina => m_stamina;
     public ATTRIBUTETYPE AttributeType => m_attributeType;
@@ -84,6 +85,13 @@ public class Player : MonoBehaviour
             m_stateMachine.Change_State((int)STATE.ST_HIT);
         }
 
+        // 이펙트 생성
+        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Hit");
+        if (obj != null)
+        {
+            obj.transform.position = new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f), transform.position.z);
+        }
+
         m_hpSlider.Set_Slider(m_hp);
     }
 
@@ -114,6 +122,7 @@ public class Player : MonoBehaviour
         m_sr = GetComponent<SpriteRenderer>();
         m_rb = GetComponent<Rigidbody2D>();
         m_am = GetComponent<Animator>();
+        m_as = GetComponent<AudioSource>();
 
         // State
         m_stateMachine = new StateMachine<Player>(gameObject);
@@ -177,16 +186,16 @@ public class Player : MonoBehaviour
         {
             case ATTRIBUTETYPE.AT_FIRE:
                 m_attributeType = ATTRIBUTETYPE.AT_THUNDER;
-                m_buttonImage[0].sprite = m_buttonSprite[0];
-                m_buttonImage[1].sprite = m_buttonSprite[2];
-                m_buttonImage[2].sprite = m_buttonSprite[4];
+                m_buttonImage[0].sprite = m_buttonSprite[1];
+                m_buttonImage[1].sprite = m_buttonSprite[3];
+                m_buttonImage[2].sprite = m_buttonSprite[5];
                 break;
 
             case ATTRIBUTETYPE.AT_THUNDER:
                 m_attributeType = ATTRIBUTETYPE.AT_FIRE;
-                m_buttonImage[0].sprite = m_buttonSprite[1];
-                m_buttonImage[1].sprite = m_buttonSprite[3];
-                m_buttonImage[2].sprite = m_buttonSprite[5];
+                m_buttonImage[0].sprite = m_buttonSprite[0];
+                m_buttonImage[1].sprite = m_buttonSprite[2];
+                m_buttonImage[2].sprite = m_buttonSprite[4];
                 break;
         }
     }
@@ -258,5 +267,16 @@ public class Player : MonoBehaviour
             return;
 
         m_stateMachine.OnDrawGizmos();
+    }
+
+    public void Play_AudioSource(string audioClip, bool loop, float speed, float volume)
+    {
+        m_as.Stop();
+
+        m_as.clip = GameManager.Ins.Play.Effect[audioClip];
+        m_as.loop = loop;
+        m_as.pitch = speed; // 기본1f
+        m_as.volume = volume;
+        m_as.Play();
     }
 }

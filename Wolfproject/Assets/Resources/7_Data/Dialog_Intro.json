@@ -1,0 +1,43 @@
+[
+  {
+    "m_dataType": 2, // 페이드
+    "dialogText": "",
+    "cutSpr": "",
+    "fade" : 1 // 인
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명1",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명2",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명3",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명4",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명5",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명6",
+    "cutSpr": "CUT_I1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "스토리 설명7",
+    "cutSpr": "CUT_I1"
+  }
+]

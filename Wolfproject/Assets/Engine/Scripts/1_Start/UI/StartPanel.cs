@@ -29,7 +29,7 @@ public class StartPanel : MonoBehaviour
 
     public void Button_Start()
     {
-        GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_PLAY);
+        GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_CUT);
     }
 
     public void Button_Method(bool start)

@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class GameManager : MonoBehaviour
 {
-    public enum SCENE { SCENE_MAIN, SCENE_PLAY, SCENE_END }
+    public enum SCENE { SCENE_MAIN, SCENE_CUT, SCENE_PLAY, SCENE_END }
 
     private bool m_isGame = false;
     private int m_curScene = -1;
+    private int m_preScene = -1;
     private List<ScenesManager> m_scenes;
 
     private static GameManager m_instance = null;
     private UIManager m_uIManager = null;
 
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
+    public int PreScene { get => m_preScene; }
     public static GameManager Ins => m_instance;
+    public CutManager Cut => (CutManager)m_scenes[(int)SCENE.SCENE_CUT];
     public PlayManager Play => (PlayManager)m_scenes[(int)SCENE.SCENE_PLAY];
     public UIManager UI => m_uIManager;
 
@@ -29,6 +33,7 @@ public class GameManager : MonoBehaviour
             // ¸Å´ÏÀú
             m_scenes = new List<ScenesManager>();
             m_scenes.Add(new StartManager());
+            m_scenes.Add(new CutManager());
             m_scenes.Add(new PlayManager());
 
             Scene currentScene = SceneManager.GetActiveScene();
@@ -66,8 +71,11 @@ public class GameManager : MonoBehaviour
     public void Change_Scene(SCENE sceneType)
     {
         if (m_curScene != -1)
+        {
+            m_preScene = m_curScene;
             m_scenes[(int)m_curScene].Exit_Game();
-
+        }
+    
         m_curScene = (int)sceneType;
         m_scenes[(int)m_curScene].Enter_Game();
     }
@@ -106,6 +114,18 @@ public class GameManager : MonoBehaviour
             return;
 
         Object.Destroy(gameObject);
+    }
+
+    public List<T> Load_JsonData<T>(string filePath)
+    {
+        TextAsset jsonAsset = Load<TextAsset>(filePath);
+
+        if (jsonAsset != null)
+            return JsonConvert.DeserializeObject<List<T>>(jsonAsset.text);
+        else
+            Debug.LogError($"Failed to load Jsondata : {filePath}");
+
+        return null;
     }
     #endregion
 }

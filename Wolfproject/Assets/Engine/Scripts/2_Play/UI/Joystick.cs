@@ -3,23 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler// IPointerUpHandler, IPointerDownHandler
+public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    private float m_leverRange = 50f;
+    private float m_leverRange = 100f;
 
     private bool m_isInput;
     private Vector2 m_inputVector = new Vector2(-1f, 0f);
 
     private RectTransform m_lever;
     private RectTransform m_rectTransform;
+    private Vector2 m_startPosition;
 
     public bool IsInput => m_isInput;
     public Vector2 InputVector => m_inputVector;
 
     private void Awake()
     {
-        m_lever = transform.GetChild(0).GetComponent<RectTransform>();
-        m_rectTransform = GetComponent<RectTransform>();
+        m_rectTransform = transform.GetChild(0).GetComponent<RectTransform>();
+        m_startPosition = m_rectTransform.anchoredPosition;
+
+        m_lever = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();
+    }
+
+    // 클릭했을 때
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
+        m_rectTransform.anchoredPosition = localPoint;
+    }
+
+    // 클릭땠을 때
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        m_rectTransform.anchoredPosition = m_startPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -35,6 +52,8 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        m_rectTransform.anchoredPosition = m_startPosition;
+
         m_lever.anchoredPosition = Vector2.zero;
         m_isInput = false;
     }

@@ -8,7 +8,7 @@ public class Slime : Monster
 
     private void Start()
     {
-        Start_Monster();
+        Initialize_Monster();
 
         m_hpMax = 5f;
         m_hp = m_hpMax;

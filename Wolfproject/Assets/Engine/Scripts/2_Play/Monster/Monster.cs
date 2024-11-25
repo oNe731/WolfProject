@@ -98,9 +98,9 @@ public class Monster : Character
         m_isKnockedBack = false;
     }
 
-    protected void Start_Monster()
+    protected void Initialize_Monster()
     {
-        Initialize();
+        Initialize_Character();
 
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();

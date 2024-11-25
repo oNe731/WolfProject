@@ -7,7 +7,7 @@ public class Mushroom : Monster
     // Start is called before the first frame update
     void Start()
     {
-        Start_Monster();
+        Initialize_Monster();
 
         m_hpMax = 5f;
         m_hp = m_hpMax;

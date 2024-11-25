@@ -97,7 +97,7 @@ public class Player : Character
 
     private void Start()
     {
-        Initialize();
+        Initialize_Character();
 
         m_hpMax = 100f;
         m_hp = m_hpMax;

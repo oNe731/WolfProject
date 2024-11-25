@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : Character
 {
     public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_END }
 
@@ -100,6 +100,8 @@ public class Monster : MonoBehaviour
 
     protected void Start_Monster()
     {
+        Initialize();
+
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_defaultMat = m_spriteRenderer.material;

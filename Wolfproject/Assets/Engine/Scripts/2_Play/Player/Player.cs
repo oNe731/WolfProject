@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     public enum STATE { ST_IDLE, ST_WALK, ST_DASH, ST_ATTACKNEAR, ST_ATTACKFAR, ST_HIT, ST_DIE, ST_END }    
     public enum ATTRIBUTETYPE { AT_FIRE, AT_THUNDER, AT_END }
@@ -97,6 +97,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
+
         m_hpMax = 100f;
         m_hp = m_hpMax;
         for(int i = 0; i < m_hpSliders.Length; ++i)

@@ -19,7 +19,7 @@ public class Player_Hit : Player_Base
     public override void Update_State()
     {
         m_time += Time.deltaTime;
-        if(m_time > 0.2f)
+        if(m_time > 0.1f)
         {
             m_stateMachine.Change_State((int)Player.STATE.ST_IDLE);
         }

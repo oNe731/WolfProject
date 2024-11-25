@@ -31,7 +31,7 @@ public class Slime_Attack : Slime_Base
                 if (Get_PlayerDistance() <= m_attackDistance)
                 {
                     GameManager.Ins.Play.Player.Damaged_Player(m_owner.Damage);
-                    GameManager.Ins.Play.Player.Start_Sturn(0.5f);
+                    //GameManager.Ins.Play.Player.Start_Sturn(0.2f);
                 }
             }
             if (animTime >= 1.0f)

@@ -1,0 +1,23 @@
+[
+  {
+    "m_dataType": 2, // 페이드
+    "dialogText": "",
+    "cutSpr": "",
+    "fade" : 1 // 인
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "아기 늑대는 홀로 모든 위험을 이겨냈지만...",
+    "cutSpr": "Cut_Ef1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "이제 혼자만의 길을 걸어가야 했다.",
+    "cutSpr": "Cut_Ef1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "그 길의 끝에서 무엇을 만날지는 알 수 없었다.",
+    "cutSpr": "Cut_Ef2"
+  }
+]

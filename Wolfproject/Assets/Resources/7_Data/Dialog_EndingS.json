@@ -1,0 +1,23 @@
+[
+  {
+    "m_dataType": 2, // 페이드
+    "dialogText": "",
+    "cutSpr": "",
+    "fade" : 1 // 인
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "긴 여정 끝에 부모를 찾은 아기 늑대.",
+    "cutSpr": "Cut_Es1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "무리의 따뜻한 품으로 돌아갈 수 있었다.",
+    "cutSpr": "Cut_Es1"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "늑대는 혼자가 아니었다. 이들은 함께할 때 더 강해질 수 있었다.",
+    "cutSpr": "Cut_Es2"
+  }
+]

@@ -7,37 +7,22 @@
   },
   {
     "m_dataType": 1,
-    "dialogText": "스토리 설명1",
+    "dialogText": "늑대 무리 속에서 따뜻한 보금자리를 지키던 아기 늑대.",
     "cutSpr": "CUT_I1"
   },
   {
     "m_dataType": 1,
-    "dialogText": "스토리 설명2",
+    "dialogText": "그러나 갑작스러운 위협이 찾아와 부모와 무리에서 떨어지고 말았다.",
     "cutSpr": "CUT_I1"
   },
   {
     "m_dataType": 1,
-    "dialogText": "스토리 설명3",
-    "cutSpr": "CUT_I1"
+    "dialogText": "아기 늑대는 부모를 찾기 위해 모험을 떠나야 했다.",
+    "cutSpr": "CUT_I2"
   },
   {
     "m_dataType": 1,
-    "dialogText": "스토리 설명4",
-    "cutSpr": "CUT_I1"
-  },
-  {
-    "m_dataType": 1,
-    "dialogText": "스토리 설명5",
-    "cutSpr": "CUT_I1"
-  },
-  {
-    "m_dataType": 1,
-    "dialogText": "스토리 설명6",
-    "cutSpr": "CUT_I1"
-  },
-  {
-    "m_dataType": 1,
-    "dialogText": "스토리 설명7",
-    "cutSpr": "CUT_I1"
+    "dialogText": "위험한 숲속에서 자신만의 길을 만들어야 한다.",
+    "cutSpr": "CUT_I2"
   }
 ]

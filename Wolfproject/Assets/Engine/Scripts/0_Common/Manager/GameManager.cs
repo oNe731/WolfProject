@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private List<ScenesManager> m_scenes;
 
     private string m_playerName = "";
+    private int m_zenScore = 0;
+    private int m_chaosScore = 0;
     private AudioSource m_audioSource;
 
     private static GameManager m_instance = null;
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
     public PlayManager Play => (PlayManager)m_scenes[(int)SCENE.SCENE_PLAY];
 
     public string PlayerName => m_playerName;
+    public int ZenScore => m_zenScore;
+    public int ChaosScore => m_chaosScore;
     public AudioSource AudioSource => m_audioSource;
 
     public static GameManager Ins => m_instance;

@@ -19,6 +19,13 @@ public class CutManager : ScenesManager
     protected override void Load_Resource()
     {
         m_cutSpr.Add("CUT_I1", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_I1"));
+        m_cutSpr.Add("CUT_I2", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_I2"));
+
+        m_cutSpr.Add("Cut_Es1", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Es1"));
+        m_cutSpr.Add("Cut_Es2", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Es2"));
+
+        m_cutSpr.Add("Cut_Ef1", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Ef1"));
+        m_cutSpr.Add("Cut_Ef2", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Ef2"));
     }
 
     public override void Enter_Game()
@@ -48,7 +55,10 @@ public class CutManager : ScenesManager
                 break;
 
             case (int)GameManager.SCENE.SCENE_PLAY: // ¼±, È¥µ· Á¡¼ö¿¡ µû¸¥ ¿£µù ÄÆ¾À Ãâ·Â
-                path += "";
+                if(GameManager.Ins.ZenScore > GameManager.Ins.ChaosScore)
+                    path += "Dialog_EndingS";
+                else
+                    path += "Dialog_EndingF";
                 break;
 
             default:

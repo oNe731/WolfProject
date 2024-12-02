@@ -107,6 +107,7 @@ public class Player : Character
             m_hpSliders[i].value = m_hp;
         }
         m_hpSlider = m_hpSliders[0].GetComponent<UISliderOwner>();
+        m_hpSlider.Initialize();
         m_hpSlider.Set_Slider(m_hp);
 
         m_staminaMax = 50f;
@@ -117,6 +118,7 @@ public class Player : Character
             m_staminaSliders[i].value = m_stamina;
         }
         m_staminaSlider = m_staminaSliders[0].GetComponent<UISliderOwner>();
+        m_staminaSlider.Initialize();
         Set_StaminaSlider();
 
         m_damage = 2f;
@@ -155,6 +157,9 @@ public class Player : Character
             }
             return;
         }
+
+        if (m_stateMachine == null)
+            return;
 
         m_stateMachine.Update_State();
     }

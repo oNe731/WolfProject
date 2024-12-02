@@ -11,7 +11,7 @@ public class UISliderOwner : MonoBehaviour
 
     public Image FillImage => m_fillImage;
 
-    private void Start()
+    public void Initialize()
     {
         m_slider = GetComponent<Slider>();
 

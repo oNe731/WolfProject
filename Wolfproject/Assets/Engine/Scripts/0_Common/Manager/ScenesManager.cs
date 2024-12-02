@@ -38,7 +38,7 @@ public abstract class ScenesManager
         }
 
         // 씬 전환 시 초기화 셋팅
-        //*
+        GameManager.Ins.Sound.Update_AllAudioSources();
 
         Load_Scene();
     }

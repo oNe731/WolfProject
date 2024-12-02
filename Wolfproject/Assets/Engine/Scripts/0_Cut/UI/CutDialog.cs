@@ -24,7 +24,12 @@ public class CutDialog : MonoBehaviour
             return;
 
         if (Input.GetMouseButtonDown(0))
-            Update_Dialog();
+        {
+            Vector2 touchPosition = Input.mousePosition;
+            float screenHeight = Screen.height;
+            if (touchPosition.y < screenHeight * 0.75f)
+                Update_Dialog();
+        }
     }
 
     private void Update_Dialog()

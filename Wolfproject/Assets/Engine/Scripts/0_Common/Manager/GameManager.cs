@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class GameManager : MonoBehaviour
     private List<ScenesManager> m_scenes;
 
     private string m_playerName = "";
+    private AudioSource m_audioSource;
 
     private static GameManager m_instance = null;
     private UIManager m_uIManager = null;
+    private SoundManager m_soundManager = null;
+    private Panel_Option m_option;
 
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
     public int PreScene { get => m_preScene; }
@@ -24,9 +28,11 @@ public class GameManager : MonoBehaviour
     public PlayManager Play => (PlayManager)m_scenes[(int)SCENE.SCENE_PLAY];
 
     public string PlayerName => m_playerName;
+    public AudioSource AudioSource => m_audioSource;
 
     public static GameManager Ins => m_instance;
     public UIManager UI => m_uIManager;
+    public SoundManager Sound => m_soundManager;
 
     private void Awake()
     {
@@ -34,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             m_instance = this;
             m_uIManager = gameObject.AddComponent<UIManager>();
+            m_soundManager = gameObject.AddComponent<SoundManager>();
+
+            m_option = gameObject.transform.GetChild(0).GetComponent<Panel_Option>();
+            m_audioSource = gameObject.GetComponent<AudioSource>();
 
             // ¸Å´ÏÀú
             m_scenes = new List<ScenesManager>();

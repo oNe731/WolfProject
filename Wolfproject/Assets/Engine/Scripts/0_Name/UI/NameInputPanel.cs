@@ -10,10 +10,6 @@ public class NameInputPanel : MonoBehaviour
     public void Button_InputName()
     {
         GameManager.Ins.Set_PlayerName(m_name.text);
-
-        // 게임 시작 (UI 업데이트)
-        //GameManager.Ins.
-
-        Destroy(gameObject);
+        GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_TUTORIAL), 0.2f, false);
     }
 }

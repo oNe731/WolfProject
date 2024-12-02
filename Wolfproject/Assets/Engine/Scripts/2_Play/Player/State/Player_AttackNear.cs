@@ -13,7 +13,7 @@ public class Player_AttackNear : Player_Attack
         m_coolTime = 1f;
 
         m_animationName = "IsAttackNear";
-        m_attackCollider = m_owner.transform.GetChild(1).GetComponent<BoxCollider2D>();
+        m_attackCollider = m_owner.transform.GetChild(2).GetComponent<BoxCollider2D>();
     }
 
     public override void Enter_State()

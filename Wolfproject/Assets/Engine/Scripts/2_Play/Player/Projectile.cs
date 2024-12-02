@@ -21,7 +21,11 @@ public class Projectile : MonoBehaviour
 
     public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct)
     {
-        m_player = GameManager.Ins.Play.Player;
+        if (GameManager.Ins.CurScene == (int)GameManager.SCENE.SCENE_TUTORIAL)
+            m_player = GameManager.Ins.Tutorial.Player;
+        else if (GameManager.Ins.CurScene == (int)GameManager.SCENE.SCENE_PLAY)
+            m_player = GameManager.Ins.Play.Player;
+
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
 
@@ -32,12 +36,12 @@ public class Projectile : MonoBehaviour
         if (m_type == Player.ATTRIBUTETYPE.AT_FIRE)
         {
             m_animator.SetTrigger("IsFire");
-            GameManager.Ins.Play.Player.Play_AudioSource("Player_fire", false, 1f, 1f);
+            m_player.Play_AudioSource("Player_fire", false, 1f, 1f);
         }
         else if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
         {
             m_animator.SetTrigger("IsThunder");
-            GameManager.Ins.Play.Player.Play_AudioSource("Player_lightning", false, 1f, 1f);
+            m_player.Play_AudioSource("Player_lightning", false, 1f, 1f);
         }
     }
 

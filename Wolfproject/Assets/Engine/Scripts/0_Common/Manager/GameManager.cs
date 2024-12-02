@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
-    public enum SCENE { SCENE_MAIN, SCENE_CUT, SCENE_TUTORIAL, SCENE_PLAY, SCENE_END }
+    public enum SCENE { SCENE_MAIN, SCENE_CUT, SCENE_NAME, SCENE_TUTORIAL, SCENE_PLAY, SCENE_END }
 
     private bool m_isGame = false;
     private int m_curScene = -1;
@@ -25,8 +25,10 @@ public class GameManager : MonoBehaviour
     private Panel_Option m_option;
 
     public bool IsGame { get => m_isGame; set => m_isGame = value; }
+    public int CurScene { get => m_curScene; }
     public int PreScene { get => m_preScene; }
     public CutManager Cut => (CutManager)m_scenes[(int)SCENE.SCENE_CUT];
+    public TutorialManager Tutorial => (TutorialManager)m_scenes[(int)SCENE.SCENE_TUTORIAL];
     public PlayManager Play => (PlayManager)m_scenes[(int)SCENE.SCENE_PLAY];
 
     public string PlayerName => m_playerName;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
             m_scenes = new List<ScenesManager>();
             m_scenes.Add(new StartManager());
             m_scenes.Add(new CutManager());
+            m_scenes.Add(new NameManager());
             m_scenes.Add(new TutorialManager());
             m_scenes.Add(new PlayManager());
 

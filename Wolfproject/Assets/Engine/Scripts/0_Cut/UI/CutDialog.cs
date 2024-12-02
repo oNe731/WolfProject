@@ -61,14 +61,14 @@ public class CutDialog : MonoBehaviour
                 switch (GameManager.Ins.PreScene)
                 {
                     case (int)GameManager.SCENE.SCENE_MAIN: // ÀÎÆ®·Î ÄÆ¾À
-                        GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_TUTORIAL), 0.2f, false);
+                        GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_NAME), 0.2f, false);
                         break;
 
                     case (int)GameManager.SCENE.SCENE_PLAY: // ¼±, È¥µ· Á¡¼ö¿¡ µû¸¥ ¿£µù ÄÆ¾À
                         break;
 
                     default:
-                        GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_TUTORIAL), 0.2f, false);
+                        GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_NAME), 0.2f, false);
                         break;
                 }
             }

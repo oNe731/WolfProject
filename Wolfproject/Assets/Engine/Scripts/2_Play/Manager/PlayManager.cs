@@ -78,5 +78,7 @@ public class PlayManager : ScenesManager
 
     public override void Set_Pause(bool pause)
     {
+        if (m_player != null)
+            m_player.Set_Pause(true);
     }
 }

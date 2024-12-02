@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
     public void Set_Pause(bool pause)
     {
         m_isGame = !pause;
+        if (m_curScene != -1)
+            m_scenes[(int)m_curScene].Set_Pause(pause);
     }
 
     public void Set_PlayerName(string name)

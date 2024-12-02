@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.CompareTag("Player"))
+        {
+            GameManager.Ins.Set_Pause(true);
+            GameManager.Ins.UI.Start_FadeOut(1f, Color.black, () => GameManager.Ins.Change_Scene(GameManager.SCENE.SCENE_PLAY), 0f, false);
+        }
     }
 }

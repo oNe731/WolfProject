@@ -28,6 +28,9 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     // 클릭했을 때
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (GameManager.Ins.IsGame == false)
+            return;
+
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
         m_rectTransform.anchoredPosition = localPoint;

@@ -3173,7 +3173,7 @@ Transform:
   m_GameObject: {fileID: 5405056977295914897}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.52, y: 25.81, z: 0}
+  m_LocalPosition: {x: -40.52, y: 27, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3226,7 +3226,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: -295554544, guid: 8ef7a9edb5fd6f54a8831c30444426f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -5544,7 +5544,7 @@ GameObject:
   - component: {fileID: 4640151035865213306}
   - component: {fileID: 8810330047797169654}
   - component: {fileID: 4426076095428348396}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Player_K
   m_TagString: Untagged
   m_Icon: {fileID: 0}

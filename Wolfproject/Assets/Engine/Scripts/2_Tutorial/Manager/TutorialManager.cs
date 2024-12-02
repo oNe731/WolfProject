@@ -57,4 +57,10 @@ public class TutorialManager : ScenesManager
     public override void Exit_Game()
     {
     }
+
+    public override void Set_Pause(bool pause)
+    {
+        if(m_player != null)
+            m_player.Set_Pause(true);
+    }
 }

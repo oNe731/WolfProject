@@ -66,4 +66,6 @@ public abstract class ScenesManager
     public virtual void Over_Game()
     {
     }
+
+    public abstract void Set_Pause(bool pause);
 }

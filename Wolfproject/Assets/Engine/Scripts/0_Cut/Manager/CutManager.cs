@@ -79,4 +79,8 @@ public class CutManager : ScenesManager
     public override void Exit_Game()
     {
     }
+
+    public override void Set_Pause(bool pause)
+    {
+    }
 }

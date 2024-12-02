@@ -143,6 +143,9 @@ public class Player : Character
 
     private void Update()
     {
+        if (GameManager.Ins.IsGame == false)
+            return;
+
         if (m_recover == true)
             Recover_Stamina();
 
@@ -166,7 +169,7 @@ public class Player : Character
 
     public void Attack_Player(ATTACKTYPE attackType)
     {
-        if (m_attackCool == true || m_isSturn == true)
+        if (m_attackCool == true || m_isSturn == true || GameManager.Ins.IsGame == false)
             return;
 
         switch (attackType)
@@ -186,7 +189,7 @@ public class Player : Character
 
     public void Change_AttributeType()
     {
-        if (m_isSturn == true)
+        if (m_isSturn == true || GameManager.Ins.IsGame == false)
             return;
 
         switch (m_attributeType)
@@ -209,7 +212,7 @@ public class Player : Character
 
     public void Dash_Player()
     {
-        if (m_dash == true || m_dashCool == true || m_stamina < 10f || m_isSturn == true)
+        if (m_dash == true || m_dashCool == true || m_stamina < 10f || m_isSturn == true || GameManager.Ins.IsGame == false)
             return;
 
         Use_Stamina(10f);
@@ -285,5 +288,19 @@ public class Player : Character
         m_as.pitch = speed; // 기본1f
         m_as.volume = volume;
         m_as.Play();
+    }
+
+    public void Set_Pause(bool pause)
+    {
+        if(pause == true) // 정지
+        {
+            Rb.velocity = Vector2.zero;
+            Rb.isKinematic = true;
+            m_stateMachine.Change_State((int)STATE.ST_IDLE);
+        }
+        else
+        {
+            Rb.isKinematic = false;
+        }
     }
 }

@@ -31,9 +31,5 @@ public class Player_Base : State<Player>
     protected void Move_Player(Vector2 direct)
     {
         m_owner.Rb.velocity = direct * m_owner.MoveSpeed;
-        if (m_owner.Joystick.InputVector.x < 0)
-            m_owner.Sr.flipX = false;
-        else if (m_owner.Joystick.InputVector.x > 0)
-            m_owner.Sr.flipX = true;
     }
 }

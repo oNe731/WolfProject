@@ -8,7 +8,7 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private float m_leverRange = 100f;
 
     private bool m_isInput;
-    private Vector2 m_inputVector = new Vector2(1f, 0f);
+    private Vector2 m_inputVector = new Vector2(0f, -1f);
 
     private RectTransform m_lever;
     private RectTransform m_rectTransform;

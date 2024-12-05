@@ -164,6 +164,9 @@ public class Player : Character
         if (m_stateMachine == null)
             return;
 
+        AM.SetFloat("X", m_joystick.InputVector.x);
+        AM.SetFloat("Y", m_joystick.InputVector.y);
+
         m_stateMachine.Update_State();
     }
 

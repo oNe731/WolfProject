@@ -27,8 +27,9 @@ public class Player_Dash : Player_Base
         m_owner.Invincibility = true; // 무적 상태 (적의 공격, 충돌 무시)
 
         m_time = 0f;
-        m_direct = m_owner.Joystick.InputVector; // 조이스틱 입력 방향으로 대쉬
-        m_owner.MoveSpeed = 10f;                 // 대쉬 이동 속도
+
+        m_direct = m_owner.Get_Direction(m_owner.Joystick.InputVector);
+        m_owner.MoveSpeed = 10f; // 대쉬 이동 속도
 
         // UI 변경
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);

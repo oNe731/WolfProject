@@ -21,6 +21,8 @@ public class UISliderOwner : MonoBehaviour
 
     public void Set_Slider(float value)
     {
+        if (value < 0)
+            value = 0f;
         m_slider.value = value;
 
         int currentValue = (int)m_slider.value;

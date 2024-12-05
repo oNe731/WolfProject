@@ -23,7 +23,7 @@ public class UIBlood : MonoBehaviour
 
     public void Stop_Blood()
     {
-        if (m_isBlick == false)
+        if (m_isBlick == false || GameManager.Ins.IsGame == false)
             return;
 
         if (m_coroutine != null)
@@ -50,8 +50,12 @@ public class UIBlood : MonoBehaviour
         Color StartColor = m_image.color;
         while (elapsed < duration)
         {
-            m_image.color = new Color(StartColor.r, StartColor.g, StartColor.b, Mathf.Lerp(start, end, elapsed / duration));
-            elapsed += Time.deltaTime;
+            if(GameManager.Ins.IsGame == true)
+            {
+                m_image.color = new Color(StartColor.r, StartColor.g, StartColor.b, Mathf.Lerp(start, end, elapsed / duration));
+                elapsed += Time.deltaTime;
+            }
+
             yield return null;
         }
 

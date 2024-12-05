@@ -6,14 +6,11 @@ public class Player_AttackNear : Player_Attack
 {
     private bool m_attack = false;
     private float m_distance = 1f;
-    private BoxCollider2D m_attackCollider;
 
     public Player_AttackNear(StateMachine<Player> stateMachine) : base(stateMachine, 0)
     {
         m_coolTime = 1f;
-
         m_animationName = "IsAttackNear";
-        m_attackCollider = m_owner.transform.GetChild(2).GetComponent<BoxCollider2D>();
     }
 
     public override void Enter_State()
@@ -59,20 +56,28 @@ public class Player_AttackNear : Player_Attack
     {
         m_owner.Play_AudioSource("Player_Melee", false, 1f, 1f);
 
-        // 이펙트 생성
-        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Attack");
-        if(obj != null)
-        {
-            obj.transform.position = new Vector3(m_owner.transform.position.x + Random.Range(-0.2f, 0.2f), m_owner.transform.position.y + Random.Range(-0.2f, 0.2f), m_owner.transform.position.z);
-        }
-
         // 특정 범위 안에 있는 모든 콜라이더를 가져옴 // OverlapCircle : 원 형태의 범위, 2D 물리 시스템
+        Set_ColliderDirection();
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(collider.transform.position, m_distance, LayerMask.GetMask("Monster"));
         foreach (Collider2D hitCollider in hitColliders)
         {
             Monster monster = hitCollider.gameObject.GetComponent<Monster>();
             if (monster != null)
                 monster.Damaged_Monster(m_damage);
+        }
+
+        // 이펙트 생성
+        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Attack");
+        if (obj != null)
+        {
+            obj.transform.position = new Vector3(m_effectPoint.position.x + Random.Range(-0.05f, 0.05f), m_effectPoint.position.y + Random.Range(-0.05f, 0.05f), m_effectPoint.position.z);
+
+            // 방향 설정
+            DIRECTION dirName = m_owner.Get_Direction();
+            if (dirName == DIRECTION.DT_RIGHT || dirName == DIRECTION.DT_UP)
+                obj.GetComponent<SpriteRenderer>().flipX = true;
+            if (dirName == DIRECTION.DT_DOWN || dirName == DIRECTION.DT_UP)
+                obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y + 0.1f, obj.transform.position.z);
         }
     }
 }

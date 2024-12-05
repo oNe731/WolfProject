@@ -14,6 +14,13 @@ public class Player_Hit : Player_Base
     {
         m_time = 0f;
         m_owner.AM.SetTrigger("IsHit");
+
+        // ÀÌÆåÆ® »ý¼º
+        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Hit");
+        if (obj != null)
+        {
+            obj.transform.position = new Vector3(m_owner.transform.position.x + Random.Range(-0.2f, 0.2f), m_owner.transform.position.y + Random.Range(-0.2f, 0.2f), m_owner.transform.position.z);
+        }
     }
 
     public override void Update_State()

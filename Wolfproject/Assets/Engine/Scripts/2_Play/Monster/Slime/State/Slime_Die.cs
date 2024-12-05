@@ -13,7 +13,7 @@ public class Slime_Die : Slime_Base
     public override void Enter_State()
     {
         m_owner.Rigidbody2D.velocity = Vector2.zero;
-        m_owner.Animator.SetBool("Is_Dead", true);
+        m_owner.Animator.SetTrigger("Is_Dead");
         //Debug.Log("»ç¸Á");
     }
 
@@ -21,13 +21,14 @@ public class Slime_Die : Slime_Base
     {
         if (m_owner.Animator.IsInTransition(0) == true)
             return;
-        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Dead") == true)
-            m_owner.Animator.SetBool("Is_Dead", false);
 
-        m_time += Time.deltaTime;
-        if(m_time > 0.5f)
+        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Dead") == true)
         {
-            GameManager.Ins.Destroy(m_owner.gameObject);
+            m_time += Time.deltaTime;
+            if (m_time > 0.5f)
+            {
+                GameManager.Ins.Destroy(m_owner.gameObject);
+            }
         }
     }
 

@@ -71,28 +71,20 @@ public class Player : Character
             return;
 
         m_hp -= damage;
-        if(m_hp <= 0)
+        m_hpSlider.Set_Slider(m_hp);
+
+        if (m_hp <= 0)
         {
             m_hp = 0;
             m_stateMachine.Change_State((int)STATE.ST_DIE);
+            return;
         }
+
+        if (m_hp <= m_hpMax * 0.2f)
+            uiBlood.Start_Blood();
         else
-        {
-            if (m_hp <= m_hpMax * 0.2f)
-                uiBlood.Start_Blood();
-            else
-                uiBlood.Stop_Blood();
-            m_stateMachine.Change_State((int)STATE.ST_HIT);
-        }
-
-        // 이펙트 생성
-        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Hit");
-        if (obj != null)
-        {
-            obj.transform.position = new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f), transform.position.y + Random.Range(-0.2f, 0.2f), transform.position.z);
-        }
-
-        m_hpSlider.Set_Slider(m_hp);
+            uiBlood.Stop_Blood();
+        m_stateMachine.Change_State((int)STATE.ST_HIT);
     }
 
     private void Start()
@@ -143,7 +135,7 @@ public class Player : Character
 
     private void Update()
     {
-        if (GameManager.Ins.IsGame == false)
+        if (GameManager.Ins.IsGame == false && m_stateMachine.CurState != (int)STATE.ST_DIE)
             return;
 
         if (m_recover == true)
@@ -299,11 +291,42 @@ public class Player : Character
         {
             Rb.velocity = Vector2.zero;
             Rb.isKinematic = true;
-            m_stateMachine.Change_State((int)STATE.ST_IDLE);
+
+            if(m_stateMachine.CurState != (int)STATE.ST_DIE)
+                m_stateMachine.Change_State((int)STATE.ST_IDLE);
         }
         else
         {
             Rb.isKinematic = false;
         }
+    }
+
+    public Vector2 Get_Direction(Vector2 direction)
+    {
+        Vector2 dir = direction;
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            dir = new Vector2(dir.x > 0 ? 1 : -1, 0); // x축이 더 크면 좌우
+        else
+            dir = new Vector2(0, dir.y > 0 ? 1 : -1); // y축이 더 크면 상하
+
+        return dir;
+    }
+
+    public DIRECTION Get_Direction()
+    {
+        Vector2 direct = Get_Direction(m_joystick.InputVector);
+
+        DIRECTION dirName = DIRECTION.DT_END;
+
+        if (direct.y == 1f) // 상
+            dirName = DIRECTION.DT_UP;
+        else if (direct.y == -1f) // 하
+            dirName = DIRECTION.DT_DOWN;
+        else if (direct.x == -1f) // 좌
+            dirName = DIRECTION.DT_LEFT;
+        else if (direct.x == 1f) // 우
+            dirName = DIRECTION.DT_RIGHT;
+
+        return dirName;
     }
 }

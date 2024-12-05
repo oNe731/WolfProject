@@ -19,7 +19,7 @@ public class Slime_Idle : Slime_Base
 
         m_owner.SpeedMax = 2f;
         m_owner.Speed = m_owner.SpeedMax;
-        m_owner.Animator.SetBool("Is_Idle", true);
+        m_owner.Animator.SetTrigger("Is_Idle");
         //Debug.Log("æ∆¿ÃµÈ");
     }
 
@@ -46,11 +46,6 @@ public class Slime_Idle : Slime_Base
             //m_owner.transform.position = Vector2.MoveTowards(m_owner.transform.position, m_randomPosition, m_owner.Speed * Time.deltaTime);
             m_owner.Rigidbody2D.MovePosition(m_owner.Rigidbody2D.position + direction * m_owner.Speed * Time.deltaTime);
         }
-
-        if (m_owner.Animator.IsInTransition(0) == true) 
-            return;
-        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Idle") == true)
-            m_owner.Animator.SetBool("Is_Idle", false);
     }
 
     public override void Exit_State()

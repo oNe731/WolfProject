@@ -19,20 +19,37 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
 
-    public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct)
+    public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct, DIRECTION dirName)
     {
         if (GameManager.Ins.CurScene == (int)GameManager.SCENE.SCENE_TUTORIAL)
             m_player = GameManager.Ins.Tutorial.Player;
         else if (GameManager.Ins.CurScene == (int)GameManager.SCENE.SCENE_PLAY)
             m_player = GameManager.Ins.Play.Player;
 
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
-        m_animator = GetComponent<Animator>();
+        m_spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        m_animator = transform.GetChild(0).GetComponent<Animator>();
 
         m_type = type;
         m_direction = direct.normalized;
 
         transform.position = startPosition + (new Vector3(m_direction.x, m_direction.y, 0f) * 0.1f);
+
+        // 방향 설정
+        switch(dirName)
+        {
+            case DIRECTION.DT_UP:
+                transform.GetChild(0).rotation = Quaternion.Euler(0f, 0f, -90f); 
+                break;
+            case DIRECTION.DT_DOWN:
+                transform.GetChild(0).rotation = Quaternion.Euler(0f, 0f, 90f); 
+                break;
+            case DIRECTION.DT_LEFT:
+                transform.GetChild(0).rotation = Quaternion.Euler(0f, 0f, 0f); 
+                break;
+            case DIRECTION.DT_RIGHT:
+                transform.GetChild(0).rotation = Quaternion.Euler(0f, 0f, 180f);
+                break;
+        }
         if (m_type == Player.ATTRIBUTETYPE.AT_FIRE)
         {
             m_animator.SetTrigger("IsFire");
@@ -59,6 +76,13 @@ public class Projectile : MonoBehaviour
         {
             if (m_type == Player.ATTRIBUTETYPE.AT_FIRE)
             {
+                if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("IsFireBoom") == true)
+                {
+                    float animTime = m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    if (animTime >= 1.0f)
+                        m_spriteRenderer.enabled = false;
+                }
+
                 m_totalTime += Time.deltaTime;
                 if (m_totalTime > 2f)
                 {
@@ -80,6 +104,13 @@ public class Projectile : MonoBehaviour
             }
             else if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
             {
+                if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("IsThunderBoom") == true)
+                {
+                    float animTime = m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+                    if (animTime >= 1.0f)
+                        m_spriteRenderer.enabled = false;
+                }
+
                 m_totalTime += Time.deltaTime;
                 if(m_totalTime > 1f)
                 {
@@ -99,7 +130,6 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Enemy") == true)
         {
             m_isSuccess = true;
-            //m_spriteRenderer.enabled = false;
             m_animator.SetBool("IsBoom", true);
 
             m_monster = collision.gameObject.GetComponent<Monster>();

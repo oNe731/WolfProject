@@ -49,12 +49,15 @@ public class Player_AttackFar : Player_Attack
 
     private void Create_Projectile()
     {
+        // 방향 변경 (콜라이더 방향 변경)
+        Set_ColliderDirection();
+
         GameObject gameObject = GameManager.Ins.LoadCreate("4_Prefab/1_Player/Projectile");
         if (gameObject != null)
         {
             Projectile projectile = gameObject.GetComponent<Projectile>();
             if (projectile != null)
-                projectile.Start_Projectile(m_owner.transform.position, m_owner.AttributeType, m_owner.Joystick.InputVector);
+                projectile.Start_Projectile(m_effectPoint.position, m_owner.AttributeType, m_owner.Get_Direction(m_owner.Joystick.InputVector), m_owner.Get_Direction());
         }
     }
 }

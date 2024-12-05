@@ -13,10 +13,16 @@ public class Player_Attack : Player_Base
     private Image m_buttonSprite;
     private TMP_Text m_text;
 
+    protected BoxCollider2D m_attackCollider;
+    protected Transform m_effectPoint;
+
     public Player_Attack(StateMachine<Player> stateMachine, int buttonIndex) : base(stateMachine)
     {
         m_buttonSprite = m_owner.ButtonImage[buttonIndex];
         m_text = m_owner.ButtonImage[buttonIndex].gameObject.transform.parent.GetChild(3).GetComponent<TMP_Text>();
+
+        m_attackCollider = m_owner.transform.GetChild(2).GetComponent<BoxCollider2D>();
+        m_effectPoint = m_owner.transform.GetChild(2).GetChild(0);
     }
 
     public override void Enter_State()
@@ -69,5 +75,18 @@ public class Player_Attack : Player_Base
         m_text.gameObject.SetActive(false);
 
         yield break;
+    }
+
+    protected void Set_ColliderDirection()
+    {
+        Vector2 direct = m_owner.Get_Direction(m_owner.Joystick.InputVector);
+        if (direct.y == 1f) // ╩С
+            m_attackCollider.transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+        else if (direct.y == -1f) // го
+            m_attackCollider.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        else if (direct.x == -1f) // аб
+            m_attackCollider.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+        else if (direct.x == 1f) // ©Л
+            m_attackCollider.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
     }
 }

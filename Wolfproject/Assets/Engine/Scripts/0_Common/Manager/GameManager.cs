@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using UnityEngine.EventSystems;
 
+public enum DIRECTION { DT_UP, DT_DOWN, DT_LEFT, DT_RIGHT, DT_END }
+
 public class GameManager : MonoBehaviour
 {
     public enum SCENE { SCENE_MAIN, SCENE_CUT, SCENE_NAME, SCENE_TUTORIAL, SCENE_PLAY, SCENE_END }

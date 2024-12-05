@@ -16,7 +16,8 @@ public class SlimeBoss : Monster
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.Ins.IsGame == false)
+            return;
     }
 
     /*

@@ -13,7 +13,7 @@ public class Slime_Attack : Slime_Base
     public override void Enter_State()
     {
         m_isAttack = false;
-        m_owner.Animator.SetBool("Is_Attack", true);
+        m_owner.Animator.SetTrigger("Is_Attack");
         //Debug.Log("АјАн");
     }
 
@@ -23,7 +23,6 @@ public class Slime_Attack : Slime_Base
             return;
         if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Attack") == true)
         {
-            m_owner.Animator.SetBool("Is_Attack", false);
             float animTime = m_owner.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (m_isAttack == false && animTime >= 0.5f)
             {

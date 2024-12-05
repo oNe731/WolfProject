@@ -35,6 +35,13 @@ public class Slime : Monster
 
     private void Update()
     {
+        if (GameManager.Ins.IsGame == false)
+        {
+            if (m_stateMachine.CurState != (int)STATE.ST_IDLE)
+                m_stateMachine.Change_State((int)STATE.ST_IDLE);
+            return;
+        }
+
         m_stateMachine.Update_State();
     }
 

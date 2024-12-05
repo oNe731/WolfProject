@@ -14,7 +14,7 @@ public class Slime_Chase : Slime_Base
     {
         m_owner.SpeedMax = 4f;
         m_owner.Speed = m_owner.SpeedMax;
-        m_owner.Animator.SetBool("Is_Chase", true);
+        m_owner.Animator.SetTrigger("Is_Chase");
         //Debug.Log("Ãß°Ý");
     }
 
@@ -26,11 +26,6 @@ public class Slime_Chase : Slime_Base
             Vector2 direction = ((Vector2)GameManager.Ins.Play.Player.transform.position - (Vector2)m_owner.transform.position).normalized;
             m_owner.Rigidbody2D.MovePosition(m_owner.Rigidbody2D.position + direction * m_owner.Speed * Time.deltaTime);
         }
-
-        if (m_owner.Animator.IsInTransition(0) == true)
-            return;
-        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Chase") == true)
-            m_owner.Animator.SetBool("Is_Chase", false);
     }
 
     public override void Exit_State()

@@ -66,6 +66,13 @@ public class Projectile : MonoBehaviour
     {
         if(m_isSuccess == false)
         {
+            m_totalTime += Time.deltaTime;
+            if (m_totalTime >= 3f)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             if (m_player.Stamina <= 0f)
                 m_speed = m_speedMax * 0.5f; // 속도 감소
             else
@@ -130,7 +137,8 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Enemy") == true)
         {
             m_isSuccess = true;
-            m_animator.SetBool("IsBoom", true);
+            m_totalTime = 0f;
+            m_animator.SetTrigger("IsBoom");
 
             m_monster = collision.gameObject.GetComponent<Monster>();
             if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
@@ -138,6 +146,10 @@ public class Projectile : MonoBehaviour
                 if(m_monster != null)
                     m_monster.Speed = m_monster.SpeedMax * 0.5f; // 이동 속도 감소
             }
+        }
+        else if(collision.CompareTag("Wall") == true)
+        {
+            Destroy(gameObject);
         }
     }
 }

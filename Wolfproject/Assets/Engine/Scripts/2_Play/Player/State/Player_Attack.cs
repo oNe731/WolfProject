@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Player_Attack : Player_Base
 {
+    protected bool m_attack = false;
+
     protected float m_damage = 1f; 
     protected string m_animationName;
     private Coroutine m_attackCoroutine = null;
@@ -15,6 +17,8 @@ public class Player_Attack : Player_Base
 
     protected BoxCollider2D m_attackCollider;
     protected Transform m_effectPoint;
+
+    protected Vector2 m_direct;
 
     public Player_Attack(StateMachine<Player> stateMachine, int buttonIndex) : base(stateMachine)
     {
@@ -31,6 +35,11 @@ public class Player_Attack : Player_Base
 
         // UI º¯°æ
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+        m_attack = false;
+        m_owner.AM.SetTrigger(m_animationName);
+
+        m_direct = m_owner.Get_Direction(m_owner.Joystick.InputVector);
     }
 
     public override void Update_State()

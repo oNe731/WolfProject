@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Player_AttackFar : Player_Attack
 {
-    private bool m_attack = false;
     public Player_AttackFar(StateMachine<Player> stateMachine) : base(stateMachine, 1)
     {
         m_coolTime = 1f;
-
         m_animationName = "IsAttackFar";
     }
 
     public override void Enter_State()
     {
         base.Enter_State();
-
-        m_attack = false;
-        m_owner.AM.SetTrigger(m_animationName);
     }
 
     public override void Update_State()
@@ -28,13 +23,22 @@ public class Player_AttackFar : Player_Attack
         if (m_owner.AM.GetCurrentAnimatorStateInfo(0).IsName(m_animationName) == true)
         {
             float animTime = m_owner.AM.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            if (m_attack == false && animTime > 0.5)
+            if (animTime > 0.5)
             {
-                m_attack = true;
-                Create_Projectile();
+                if (m_attack == false)
+                {
+                    m_attack = true;
+                    Create_Projectile();
+                }
+                else if (animTime >= 1.0f) // 애니메이션 종료
+                {
+                    m_owner.Rb.velocity = Vector2.zero;
+                    m_stateMachine.Change_State((int)Player.STATE.ST_IDLE);
+                    return;
+                }
+
+                m_owner.Rb.velocity = -m_direct * 3f;
             }
-            else if (animTime >= 1.0f) // 애니메이션 종료
-                m_stateMachine.Change_State((int)Player.STATE.ST_IDLE);
         }
     }
 

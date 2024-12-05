@@ -14,7 +14,7 @@ public class Slime_Attack : Slime_Base
     {
         m_isAttack = false;
         m_owner.Animator.SetTrigger("Is_Attack");
-        //Debug.Log("공격");
+        //Debug.Log("슬라임 공격");
     }
 
     public override void Update_State()
@@ -30,7 +30,7 @@ public class Slime_Attack : Slime_Base
                 if (Get_PlayerDistance() <= m_attackDistance)
                 {
                     GameManager.Ins.Play.Player.Damaged_Player(m_owner.Damage);
-                    //GameManager.Ins.Play.Player.Start_Sturn(0.2f);
+                    GameManager.Ins.Play.Player.Start_Sturn(0.5f);
                 }
             }
             if (animTime >= 1.0f)

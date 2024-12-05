@@ -20,7 +20,7 @@ public class Slime_Idle : Slime_Base
         m_owner.SpeedMax = 2f;
         m_owner.Speed = m_owner.SpeedMax;
         m_owner.Animator.SetTrigger("Is_Idle");
-        //Debug.Log("아이들");
+        //Debug.Log("슬라임 아이들");
     }
 
     public override void Update_State()

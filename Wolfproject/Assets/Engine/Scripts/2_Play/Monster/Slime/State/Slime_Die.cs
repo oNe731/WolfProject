@@ -14,7 +14,8 @@ public class Slime_Die : Slime_Base
     {
         m_owner.Rigidbody2D.velocity = Vector2.zero;
         m_owner.Animator.SetTrigger("Is_Dead");
-        //Debug.Log("»ç¸Á");
+        
+        //Debug.Log("½½¶óÀÓ »ç¸Á");
     }
 
     public override void Update_State()
@@ -24,10 +25,14 @@ public class Slime_Die : Slime_Base
 
         if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Dead") == true)
         {
-            m_time += Time.deltaTime;
-            if (m_time > 0.5f)
+            float animTime = m_owner.Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (animTime >= 1.0f)
             {
-                GameManager.Ins.Destroy(m_owner.gameObject);
+                m_time += Time.deltaTime;
+                if (m_time > 0.5f)
+                {
+                    GameManager.Ins.Destroy(m_owner.gameObject);
+                }
             }
         }
     }

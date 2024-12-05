@@ -14,17 +14,15 @@ public class Slime_Wait : Slime_Base
     public override void Enter_State()
     {
         m_time = 0f;
-        m_waitTime = Random.Range(0.5f, 1f);
-        m_owner.Animator.SetBool("Is_Idle", true);
-        //Debug.Log("대기");
+        m_waitTime = Random.Range(1f, 1.5f);
+        m_owner.Animator.SetTrigger("Is_Idle");
+        //Debug.Log("슬라임 공격 후 대기");
     }
 
     public override void Update_State()
     {
         if (m_owner.Animator.IsInTransition(0) == true)
             return;
-        if (m_owner.Animator.GetCurrentAnimatorStateInfo(0).IsName("Is_Idle") == true)
-            m_owner.Animator.SetBool("Is_Idle", false);
 
         m_time += Time.deltaTime;
         if (m_time > m_waitTime)

@@ -55,11 +55,11 @@ public class Monster : Character
         }
         else
         {
-            //if (m_hitIndex != -1)
-            //    m_stateMachine.Change_State(m_hitIndex);
+            if (m_hitIndex != -1)
+                m_stateMachine.Change_State(m_hitIndex);
 
             // 넉백 적용
-            if(knockedBack == true)
+            if (knockedBack == true)
                 Start_KnockedBack(2f);
 
             // 메테리얼 변경

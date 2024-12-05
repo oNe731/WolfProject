@@ -15,7 +15,7 @@ public class Slime_Chase : Slime_Base
         m_owner.SpeedMax = 4f;
         m_owner.Speed = m_owner.SpeedMax;
         m_owner.Animator.SetTrigger("Is_Chase");
-        //Debug.Log("추격");
+        //Debug.Log("슬라임 추격");
     }
 
     public override void Update_State()

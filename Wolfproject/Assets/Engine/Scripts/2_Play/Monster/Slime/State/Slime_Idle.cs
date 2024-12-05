@@ -45,6 +45,11 @@ public class Slime_Idle : Slime_Base
 
             //m_owner.transform.position = Vector2.MoveTowards(m_owner.transform.position, m_randomPosition, m_owner.Speed * Time.deltaTime);
             m_owner.Rigidbody2D.MovePosition(m_owner.Rigidbody2D.position + direction * m_owner.Speed * Time.deltaTime);
+
+            if (direction.x > 0f)
+                m_owner.SpriteRenderer.flipX = true;
+            else
+                m_owner.SpriteRenderer.flipX = false;
         }
     }
 

@@ -39,6 +39,7 @@ public class Monster : Character
     private Spawner m_spawner;
     public Spawner spawner { get => m_spawner; set => m_spawner = value; }
     public Rigidbody2D Rigidbody2D { get => m_rigidbody2D; }
+    public SpriteRenderer SpriteRenderer { get => m_spriteRenderer; }
     public Collider2D Collider2D { get => m_collider2D; }
     public Animator Animator { get => m_animator; }
 

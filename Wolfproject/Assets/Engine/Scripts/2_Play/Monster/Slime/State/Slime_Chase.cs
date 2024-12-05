@@ -25,6 +25,11 @@ public class Slime_Chase : Slime_Base
             // 플레이어 추격
             Vector2 direction = ((Vector2)GameManager.Ins.Play.Player.transform.position - (Vector2)m_owner.transform.position).normalized;
             m_owner.Rigidbody2D.MovePosition(m_owner.Rigidbody2D.position + direction * m_owner.Speed * Time.deltaTime);
+
+            if (direction.x > 0f)
+                m_owner.SpriteRenderer.flipX = true;
+            else
+                m_owner.SpriteRenderer.flipX = false;
         }
     }
 

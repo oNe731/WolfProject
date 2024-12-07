@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom_Stealth : MonoBehaviour
+public class Mushroom_Stealth : Mushroom_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    public Mushroom_Stealth(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter_State()
     {
-        
+        m_owner.Animator.SetTrigger("Is_Hide");
+    }
+
+    public override void Update_State()
+    {
+        Change_Chase();
+    }
+
+    public override void Exit_State()
+    {
+    }
+
+    public override void OnDrawGizmos()
+    {
     }
 }

@@ -2,17 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mushroom_Hit : MonoBehaviour
+public class Mushroom_Hit : Mushroom_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    private float m_WaitTime = 0f;
+
+    public Mushroom_Hit(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter_State()
     {
-        
+        m_WaitTime = 0f;
+        m_owner.Animator.SetTrigger("Is_Idle");
+
+        //Debug.Log("피격 시작");
+    }
+
+    public override void Update_State()
+    {
+        m_WaitTime += Time.deltaTime;
+        if (m_WaitTime >= 1f)
+        {
+            m_stateMachine.Change_State((int)Mushroom.STATE.ST_RUNAWAY);
+        }
+    }
+
+    public override void Exit_State()
+    {
+    }
+
+    public override void OnDrawGizmos()
+    {
     }
 }

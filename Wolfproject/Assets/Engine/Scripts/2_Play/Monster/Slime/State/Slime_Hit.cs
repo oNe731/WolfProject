@@ -29,7 +29,7 @@ public class Slime_Hit : Slime_Base
 
     public override void Exit_State()
     {
-        Debug.Log("피격 대기 종료");
+        //Debug.Log("피격 대기 종료");
     }
 
     public override void OnDrawGizmos()

@@ -174,7 +174,7 @@ AnimatorStateMachine:
     m_Position: {x: 40, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 311452497854326642}
-    m_Position: {x: -310, y: -80, z: 0}
+    m_Position: {x: -370, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5129223059087122449}
     m_Position: {x: -460, y: 90, z: 0}
@@ -189,13 +189,13 @@ AnimatorStateMachine:
     m_Position: {x: -310, y: -150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5853908981229856760}
-    m_Position: {x: -310, y: -10, z: 0}
+    m_Position: {x: -370, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 360496287506402194}
-    m_Position: {x: -460, y: 160, z: 0}
+    m_Position: {x: -520, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4932147557311737855}
-    m_Position: {x: -460, y: 230, z: 0}
+    m_Position: {x: -520, y: 230, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 9217348166742645569}
@@ -282,7 +282,7 @@ BlendTree:
     m_DirectBlendParameter: X
     m_Mirror: 0
   m_BlendParameter: X
-  m_BlendParameterY: X
+  m_BlendParameterY: Y
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -329,7 +329,7 @@ BlendTree:
     m_DirectBlendParameter: X
     m_Mirror: 0
   m_BlendParameter: X
-  m_BlendParameterY: X
+  m_BlendParameterY: Y
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -448,7 +448,7 @@ BlendTree:
     m_DirectBlendParameter: X
     m_Mirror: 0
   m_BlendParameter: X
-  m_BlendParameterY: X
+  m_BlendParameterY: Y
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -1017,7 +1017,7 @@ BlendTree:
     m_DirectBlendParameter: X
     m_Mirror: 0
   m_BlendParameter: X
-  m_BlendParameterY: X
+  m_BlendParameterY: Y
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -1151,7 +1151,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: IsAttackNear
-  m_Speed: 1
+  m_Speed: 2.3
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []

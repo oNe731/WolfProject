@@ -52,8 +52,4 @@ public class Slime : Monster
 
         m_stateMachine.OnDrawGizmos();
     }
-
-/*
-피해량: 접촉 시 플레이어에게 10의 피해.
- */
 }

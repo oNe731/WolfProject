@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dea076996fbdad849a2fb2fe0723e177
+guid: d586893ae93cf004ca306473752ed93c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kingslimeattack_0
+      name: slimered_Dead_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d65443418ffc044a9d905d5ab3b06b2
-      internalID: 1975404782
+      spriteID: 288eaf4984305c4449cd67c817a55534
+      internalID: -299373225
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kingslimeattack_1
+      name: slimered_Dead_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea698d8e2a31af24fa8ed3c705226fcf
+      internalID: 2060867871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slimered_Dead_2
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +166,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: baed269f7c4b8bc43988283e61cad4d3
-      internalID: -1046524151
+      spriteID: 98bcbb419fd41104c94b37043c517269
+      internalID: 576974915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kingslimeattack_2
+      name: slimered_Dead_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 777985f69d3ff9044bd3f7a18fb47485
+      internalID: 1117648126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slimered_Dead_4
       rect:
         serializedVersion: 2
         x: 1024
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +208,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98955ccef4b1d544299dca6a846f8818
-      internalID: -1301380952
+      spriteID: 065f2cf34a7768045a14db474a667eb3
+      internalID: 1494083769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kingslimeattack_3
+      name: slimered_Dead_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cd5f8e6ee62f3489010328aeaef4d4
+      internalID: -344971022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slimered_Dead_6
       rect:
         serializedVersion: 2
         x: 1536
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,71 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43a778e5fd267ed44bdebf174e51bb9e
-      internalID: -408420885
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kingslimeattack_4
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5134b49a66242df4d97782b38547a2ce
-      internalID: 1724549062
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kingslimeattack_5
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb704339bb72d1448957f78d167a29e4
-      internalID: 14880086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kingslimeattack_6
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fdeeadfd382e63c468e9fc6581dc9aec
-      internalID: 753740422
+      spriteID: d809aee30ef3cd947970e3c19d02f24c
+      internalID: 459447523
       vertices: []
       indices: 
       edges: []
@@ -267,13 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      kingslimeattack_0: 1975404782
-      kingslimeattack_1: -1046524151
-      kingslimeattack_2: -1301380952
-      kingslimeattack_3: -408420885
-      kingslimeattack_4: 1724549062
-      kingslimeattack_5: 14880086
-      kingslimeattack_6: 753740422
+      slimered_Dead_0: -299373225
+      slimered_Dead_1: 2060867871
+      slimered_Dead_2: 576974915
+      slimered_Dead_3: 1117648126
+      slimered_Dead_4: 1494083769
+      slimered_Dead_5: -344971022
+      slimered_Dead_6: 459447523
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

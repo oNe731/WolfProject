@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Monster : Character
 {
-    public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_END }
+    public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_SLIMEBOSS, TYPE_END }
 
     protected float m_hp;
     protected float m_hpMax;

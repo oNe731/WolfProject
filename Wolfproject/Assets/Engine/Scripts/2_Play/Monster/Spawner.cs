@@ -29,6 +29,9 @@ public class Spawner : MonoBehaviour
                 case Monster.TYPE.TYPE_MUSHROOM:
                     gameObject = GameManager.Ins.Load<GameObject>("4_Prefab/2_Monster/Mushroom");
                     break;
+                case Monster.TYPE.TYPE_SLIMEBOSS:
+                    gameObject = GameManager.Ins.Load<GameObject>("4_Prefab/2_Monster/SlimeBoss");
+                    break;
             }
 
             for (int j = 0; j < m_monsterCount[i]; j++)

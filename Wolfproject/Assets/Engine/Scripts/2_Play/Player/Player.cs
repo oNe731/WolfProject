@@ -148,7 +148,7 @@ public class Player : Character
             {
                 m_sturnTime = 0f;
                 m_isSturn = false;
-                Debug.Log("스턴 종료");
+                //Debug.Log("스턴 종료");
             }
             return;
         }
@@ -263,7 +263,7 @@ public class Player : Character
         m_isSturnTime = time;
 
         m_rb.velocity = Vector2.zero;
-        Debug.Log("스턴 시작");
+        //Debug.Log("스턴 시작");
     }
 
     private void OnDrawGizmos()

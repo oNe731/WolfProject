@@ -17,6 +17,8 @@ public class SlimeBoss_Idle : SlimeBoss_Base
         m_waitTime = Random.Range(1f, 2f);
 
         m_owner.Animator.SetTrigger("Is_Idle");
+
+        //Debug.Log("보스 아이들");
     }
 
     public override void Update_State()

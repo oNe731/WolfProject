@@ -75,4 +75,12 @@ public class StateMachine<T> where T : class
         for(int i = 0; i < m_states.Count; ++i)
             m_states[i].OnDrawGizmos();
     }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (m_curState == -1 || m_lock == true)
+            return;
+
+        m_states[(int)m_curState].OnCollisionStay2D(collision);
+    }
 }

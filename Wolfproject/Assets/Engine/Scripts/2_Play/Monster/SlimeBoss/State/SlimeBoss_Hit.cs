@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeBoss_Hit : MonoBehaviour
+public class SlimeBoss_Hit : SlimeBoss_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    private float m_WaitTime = 0f;
+
+    public SlimeBoss_Hit(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter_State()
     {
-        
+        m_WaitTime = 0f;
+        m_owner.Animator.SetTrigger("Is_Idle");
+    }
+
+    public override void Update_State()
+    {
+        m_WaitTime += Time.deltaTime;
+        if (m_WaitTime >= 1f)
+        {
+            m_stateMachine.Change_State((int)SlimeBoss.STATE.ST_IDLE);
+        }
+    }
+
+    public override void Exit_State()
+    {
     }
 }

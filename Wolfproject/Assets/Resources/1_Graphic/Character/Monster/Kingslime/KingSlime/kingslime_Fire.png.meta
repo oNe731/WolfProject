@@ -115,10 +115,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: kingslime_Fire_1
       rect:
         serializedVersion: 2
-        x: 635
+        x: 256
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: kingslime_Fire_2
       rect:
         serializedVersion: 2
-        x: 1270
+        x: 512
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +176,12 @@ TextureImporter:
       name: kingslime_Fire_3
       rect:
         serializedVersion: 2
-        x: 1905
+        x: 768
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,12 +197,12 @@ TextureImporter:
       name: kingslime_Fire_4
       rect:
         serializedVersion: 2
-        x: 2540
+        x: 1024
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +218,12 @@ TextureImporter:
       name: kingslime_Fire_5
       rect:
         serializedVersion: 2
-        x: 3175
+        x: 1280
         y: 0
-        width: 635
-        height: 635
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

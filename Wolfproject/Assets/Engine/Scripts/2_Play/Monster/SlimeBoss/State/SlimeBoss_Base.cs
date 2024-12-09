@@ -5,8 +5,8 @@ using UnityEngine;
 public class SlimeBoss_Base : State<Monster>
 {
     protected SlimeBoss m_owner;
-    protected float m_chaseDistance = 2f;
-    protected float m_attackDistance = 1f;
+    protected float m_chaseDistance = 6f;
+    protected float m_attackDistance = 3f;
 
     public SlimeBoss_Base(StateMachine<Monster> stateMachine) : base(stateMachine)
     {

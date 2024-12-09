@@ -143,6 +143,11 @@ public class GameManager : MonoBehaviour
         return Instantiate(prefab, transform);
     }
 
+    public GameObject Create(GameObject obj, Vector3 position = new Vector3(), Quaternion rotation = new Quaternion(), Transform parent = null)
+    {
+        return Instantiate(obj, position, rotation, parent);
+    }
+
     public void Destroy(GameObject gameObject)
     {
         if (gameObject == null)

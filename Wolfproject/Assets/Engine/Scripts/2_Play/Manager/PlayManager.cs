@@ -9,6 +9,8 @@ public class PlayManager : ScenesManager
     private GameObject m_playPanel;
     private GameObject m_overPanel;
 
+    private GameObject m_door;
+
     private Dictionary<string, AudioClip> m_effect = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> Effect => m_effect;
 
@@ -46,9 +48,9 @@ public class PlayManager : ScenesManager
         m_playPanel = canvas.transform.Find("Panel_Play").gameObject;
         m_overPanel = canvas.transform.Find("Panel_Over").gameObject;
 
-        // 이름 설정
-        //GameObject name = m_playPanel.transform.Find("Text_Name").gameObject;
-        //name.GetComponent<TMP_Text>().text = GameManager.Ins.PlayerName;
+        // 보스 출구 벽 생성
+        m_door = GameManager.Ins.LoadCreate("4_Prefab/3_Map/Door");
+        m_door.transform.position = new Vector3(94.74f, -32.29f, 0f);
 
         GameManager.Ins.UI.Start_FadeIn(1f, Color.black, () => Start_Game());
     }
@@ -79,5 +81,10 @@ public class PlayManager : ScenesManager
     {
         if (m_player != null)
             m_player.Set_Pause(pause);
+    }
+
+    public void Clear_Game()
+    {
+        GameManager.Ins.Destroy(m_door);
     }
 }

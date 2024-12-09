@@ -110,85 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kingslimerun_0
+      name: kingslime_Run_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6d05300cd15542499a78b44f1571cd4
-      internalID: 2050437175
+      spriteID: 759b158f945c10449b03e7b84cd2edf8
+      internalID: -1514367517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kingslimerun_1
+      name: kingslime_Run_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f9d8d019e5673943a5e17227d24f734
+      internalID: 2048961987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kingslime_Run_2
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e354e46cc5122764897cc0938759f83b
-      internalID: -1330156326
+      spriteID: aae5ba052e861d4499e3cf5b7e6a1015
+      internalID: 788210786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kingslimerun_2
+      name: kingslime_Run_3
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 768
         y: 0
-        width: 512
-        height: 512
+        width: 256
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.14}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c8023b77d11eb648822e75c891a1d0a
-      internalID: 1659326080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kingslimerun_3
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 0
-        width: 512
-        height: 512
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fdc2b2c262dff04b91f8b366b649b6e
-      internalID: -1895275587
+      spriteID: 4b30b185e6d91d94ea4d3f833c9648ac
+      internalID: 1789516223
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      kingslimerun_0: 2050437175
-      kingslimerun_1: -1330156326
-      kingslimerun_2: 1659326080
-      kingslimerun_3: -1895275587
+      kingslime_Run_0: -1514367517
+      kingslime_Run_1: 2048961987
+      kingslime_Run_2: 788210786
+      kingslime_Run_3: 1789516223
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

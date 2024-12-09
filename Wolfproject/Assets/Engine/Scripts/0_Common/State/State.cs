@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class State<T> where T : class
 {
     protected StateMachine<T> m_stateMachine;
@@ -21,5 +23,10 @@ public class State<T> where T : class
 
     public virtual void OnDrawGizmos()
     {
+    }
+
+    public virtual void OnCollisionStay2D(Collision2D collision)
+    {
+
     }
 }

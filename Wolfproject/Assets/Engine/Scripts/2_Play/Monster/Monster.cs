@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Monster : Character
 {
-    public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_SLIMEBOSS, TYPE_END }
+    public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_SLIMEBOSS, TYPE_SLIMERED, TYPE_END }
 
     protected float m_hp;
     protected float m_hpMax;
@@ -12,6 +12,7 @@ public class Monster : Character
     protected float m_speedMax;
 
     protected float m_damage;
+    protected float m_damageVariation = 1f;
 
     protected StateMachine<Monster> m_stateMachine;
     protected int m_dieIndex = -1;
@@ -27,8 +28,9 @@ public class Monster : Character
     public float Hp { get => m_hp; }
     public float HpMax { get => m_hpMax; }
     public float Speed { get => m_speed; set => m_speed = value; }
-    public float SpeedMax { get => m_speedMax; set => m_speed = value; }
+    public float SpeedMax { get => m_speedMax; set => m_speedMax = value; }
     public float Damage { get => m_damage; }
+    public float DamageVariation { get => m_damageVariation; set => m_damageVariation = value; }
     public bool IsKnockedBack { get => m_isKnockedBack; }
 
     private Rigidbody2D m_rigidbody2D;
@@ -47,7 +49,7 @@ public class Monster : Character
     {
         Debug.Log(damage + "데미지 입음");
 
-        m_hp -= damage;
+        m_hp -= (damage * m_damageVariation);
         if (m_hp <= 0)
         {
             m_hp = 0;

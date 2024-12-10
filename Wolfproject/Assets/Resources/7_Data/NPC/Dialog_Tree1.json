@@ -1,0 +1,22 @@
+[
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "여기는 왜 이렇게 조용할까? 무리도 부모님도 모두 어딨지...\n내가 가는 길이 맞는 건지 모르겠어."
+  },
+  {
+    "profileSpr": "Portrait_Tree",
+    "dialogText": "어린 늑대야, 너의 여정은 이제 시작일 뿐이란다.\n네가 앞으로 마주하게 될 선택은 그 어떤 것보다도 중요한 시험이 될 거야."
+  },
+  {
+    "profileSpr": "Portrait_Tree",
+    "dialogText": "어떤 길을 선택하든, 네가 내리는 결정은 너를 변화시킬 것이고,\n무리로 돌아가는 여정에 큰 영향을 미칠 거란다."
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "무리로 돌아가려면 뭘 해야 할까?\n내가 올바른 길을 가고 있는 거겠지?"
+  },
+  {
+    "profileSpr": "Portrait_Tree",
+    "dialogText": "올바른 길이란 무엇일까?\n어떤 길을 택하든, 네가 감당해야 할 책임이 있단다.\n네가 마주할 결정들은 네 마음에 달려 있지."
+  }
+]

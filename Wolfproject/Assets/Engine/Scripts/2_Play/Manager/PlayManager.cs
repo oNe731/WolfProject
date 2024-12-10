@@ -8,9 +8,14 @@ public class PlayManager : ScenesManager
     private Player m_player;
     private GameObject m_playPanel;
     private GameObject m_overPanel;
+    private PlayDialog m_dialog;
 
     private GameObject m_door;
+    private Dictionary<string, Sprite> m_profileSpr = new Dictionary<string, Sprite>();
 
+    public PlayDialog Dialog => m_dialog;
+
+    public Dictionary<string, Sprite> ProfileSpr => m_profileSpr;
     private Dictionary<string, AudioClip> m_effect = new Dictionary<string, AudioClip>();
     public Dictionary<string, AudioClip> Effect => m_effect;
 
@@ -24,6 +29,14 @@ public class PlayManager : ScenesManager
 
     protected override void Load_Resource()
     {
+        m_profileSpr.Add("Portrait_NPC_Happy", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_NPC_Happy"));
+        m_profileSpr.Add("Portrait_NPC_Sad",   GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_NPC_Sad"));
+        m_profileSpr.Add("Portrait_Player",    GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Player"));
+        m_profileSpr.Add("Portrait_Slime",     GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Slime"));
+        m_profileSpr.Add("Portrait_Tree",      GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Tree"));
+        m_profileSpr.Add("Portrait_Wolf",      GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Wolf"));
+
+
         m_effect.Add("Player_Melee", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/Melee"));
         m_effect.Add("Player_fire", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/fire"));
         m_effect.Add("Player_lightning", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/lightning"));
@@ -47,10 +60,11 @@ public class PlayManager : ScenesManager
         GameObject canvas = GameObject.Find("Canvas");
         m_playPanel = canvas.transform.Find("Panel_Play").gameObject;
         m_overPanel = canvas.transform.Find("Panel_Over").gameObject;
+        m_dialog = canvas.transform.Find("Panel_Dialog").gameObject.GetComponent<PlayDialog>();
 
         // 보스 출구 벽 생성
         m_door = GameManager.Ins.LoadCreate("4_Prefab/3_Map/Door");
-        m_door.transform.position = new Vector3(94.74f, -32.29f, 0f);
+        m_door.transform.position = new Vector3(137.5f, -28.52f, 0f);
 
         GameManager.Ins.UI.Start_FadeIn(1f, Color.black, () => Start_Game());
     }

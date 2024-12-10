@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SlimeBoss : Monster
 {
-    public enum STATE { 
-        ST_IDLE, ST_WALK, ST_CHASE, ST_SLASH,
+    public enum STATE {
+        ST_APEAR, ST_IDLE, ST_WALK, ST_CHASE, ST_SLASH,
         ST_PHASE1, ST_PHASE2, ST_PHASE3, ST_BERSERK, ST_SUMMON,
         ST_HIT, ST_DIE,
         ST_END }
@@ -27,6 +27,8 @@ public class SlimeBoss : Monster
 
         m_stateMachine = new StateMachine<Monster>(gameObject);
         List<State<Monster>> states = new List<State<Monster>>();
+        states.Add(new SlimeBoss_Apear(m_stateMachine));   // 0
+
         states.Add(new SlimeBoss_Idle(m_stateMachine));    // 0
         states.Add(new SlimeBoss_Walk(m_stateMachine));    // 1
         states.Add(new SlimeBoss_Chase(m_stateMachine));   // 2
@@ -42,14 +44,14 @@ public class SlimeBoss : Monster
 
         states.Add(new SlimeBoss_Hit(m_stateMachine));  // 9
         states.Add(new SlimeBoss_Dead(m_stateMachine)); // 10
-        m_stateMachine.Initialize_State(states, (int)STATE.ST_IDLE);
+        m_stateMachine.Initialize_State(states, (int)STATE.ST_APEAR);
     }
 
     private void Update()
     {
         if (GameManager.Ins.IsGame == false)
         {
-            if (m_stateMachine.CurState != (int)STATE.ST_IDLE)
+            if (m_stateMachine.CurState != (int)STATE.ST_APEAR && m_stateMachine.CurState != (int)STATE.ST_IDLE)
                 m_stateMachine.Change_State((int)STATE.ST_IDLE);
             return;
         }

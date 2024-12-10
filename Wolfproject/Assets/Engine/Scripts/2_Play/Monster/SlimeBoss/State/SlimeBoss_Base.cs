@@ -5,6 +5,7 @@ using UnityEngine;
 public class SlimeBoss_Base : State<Monster>
 {
     protected SlimeBoss m_owner;
+    protected float m_talkDistance = 2f;
     protected float m_chaseDistance = 6f;
     protected float m_attackDistance = 3f;
 
@@ -27,6 +28,9 @@ public class SlimeBoss_Base : State<Monster>
 
     public override void OnDrawGizmos()
     {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(m_owner.transform.position, m_talkDistance);
+
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(m_owner.transform.position, m_chaseDistance);
 

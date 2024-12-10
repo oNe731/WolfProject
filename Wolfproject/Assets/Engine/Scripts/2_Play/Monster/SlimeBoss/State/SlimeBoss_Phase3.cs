@@ -18,7 +18,7 @@ public class SlimeBoss_Phase3 : SlimeBoss_Base
         m_owner.Animator.SetTrigger("Is_Chase");
 
         // 이동속도가 매우 빨라짐
-        m_owner.SpeedMax = 6f;
+        m_owner.SpeedMax = 5f;
         m_owner.Speed = m_owner.SpeedMax;
 
         // 받는 피해가 증가한다.

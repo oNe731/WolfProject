@@ -13,12 +13,24 @@ public class Player_Dash : Player_Base
     private Image m_buttonSprite;
     private TMP_Text m_text;
 
+    private GameObject m_trail;
+    private int m_playerLayer;
+    private int m_playerLayerK;
+    private int m_monsterLayer;
+    private int m_monsterLayerK;
+
     public Player_Dash(StateMachine<Player> stateMachine) : base(stateMachine)
     {
         m_coolTime = 1f;
 
         m_buttonSprite = m_owner.ButtonImage[3];
         m_text = m_owner.ButtonImage[3].gameObject.transform.parent.GetChild(3).GetComponent<TMP_Text>();
+
+        m_trail = m_owner.transform.GetChild(3).gameObject;
+        m_playerLayer = LayerMask.NameToLayer("Player");
+        m_playerLayerK = LayerMask.NameToLayer("Player_K");
+        m_monsterLayer = LayerMask.NameToLayer("Monster");
+        m_monsterLayerK = LayerMask.NameToLayer("Monster_K");
     }
 
     public override void Enter_State()
@@ -36,6 +48,12 @@ public class Player_Dash : Player_Base
 
         m_owner.AM.SetTrigger("IsDash");
         m_owner.Play_AudioSource("Player_dash", false, 1f, 1f);
+
+        Physics2D.IgnoreLayerCollision(m_playerLayer, m_monsterLayer, true);
+        Physics2D.IgnoreLayerCollision(m_playerLayer, m_monsterLayerK, true);
+        Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayer, true);
+        Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayerK, true);
+        m_trail.SetActive(true);
     }
 
     public override void Update_State()
@@ -58,6 +76,12 @@ public class Player_Dash : Player_Base
         m_owner.Invincibility = false;
 
         Start_DashCoolTime();
+
+        Physics2D.IgnoreLayerCollision(m_playerLayer, m_monsterLayer, false);
+        Physics2D.IgnoreLayerCollision(m_playerLayer, m_monsterLayerK, false);
+        Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayer, false);
+        Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayerK, false);
+        m_trail.SetActive(false);
     }
 
     public override void OnDrawGizmos()

@@ -20,11 +20,11 @@ public class StartPanel : MonoBehaviour
     private void Start()
     {
         m_methodImage = m_methodPanel.transform.GetChild(0).GetComponent<Image>();
-        m_titleText = m_methodPanel.transform.GetChild(1).GetComponent<TMP_Text>();
+        m_titleText = m_methodPanel.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
 
         m_indexButton = new Image[2];
-        m_indexButton[0] = m_methodPanel.transform.GetChild(2).GetComponent<Image>();
-        m_indexButton[1] = m_methodPanel.transform.GetChild(3).GetComponent<Image>();
+        m_indexButton[0] = m_methodPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        m_indexButton[1] = m_methodPanel.transform.GetChild(0).GetChild(2).GetComponent<Image>();
     }
 
     public void Button_Start()

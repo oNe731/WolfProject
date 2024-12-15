@@ -13,6 +13,7 @@ public class Player_AttackFar : Player_Attack
     public override void Enter_State()
     {
         base.Enter_State();
+        m_owner.AttributeType = Player.ATTRIBUTETYPE.AT_FIRE;
     }
 
     public override void Update_State()

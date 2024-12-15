@@ -45,7 +45,7 @@ public class Monster : Character
     public Collider2D Collider2D { get => m_collider2D; }
     public Animator Animator { get => m_animator; }
 
-    public void Damaged_Monster(float damage, bool knockedBack = true)
+    public void Damaged_Monster(float damage, bool knockedBack = true, float knockBackThrust = 2f)
     {
         Debug.Log(damage + "데미지 입음");
 
@@ -63,7 +63,7 @@ public class Monster : Character
 
             // 넉백 적용
             if (knockedBack == true)
-                Start_KnockedBack(2f);
+                Start_KnockedBack(knockBackThrust);
 
             // 메테리얼 변경
             if (m_whiteCoroutine != null)

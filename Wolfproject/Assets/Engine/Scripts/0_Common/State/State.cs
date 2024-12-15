@@ -25,7 +25,17 @@ public class State<T> where T : class
     {
     }
 
+    public virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
+
     public virtual void OnCollisionStay2D(Collision2D collision)
+    {
+
+    }
+
+    public virtual void OnCollisionExit2D(Collision2D collision)
     {
 
     }

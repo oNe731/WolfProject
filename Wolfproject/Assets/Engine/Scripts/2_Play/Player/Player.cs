@@ -5,7 +5,15 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
-    public enum STATE { ST_IDLE, ST_WALK, ST_DASH, ST_ATTACKNEAR, ST_ATTACKFAR, ST_HIT, ST_DIE, ST_END }    
+    public enum STATE 
+    { 
+        ST_IDLE, ST_WALK, ST_DASH, ST_ATTACKNEAR, ST_ATTACKFAR,
+        ST_ATTACKNEAR_MOVE, ST_ATTACKNEAR_DASH,
+        ST_ATTACKFAR_MOVE, ST_ATTACKFAR_DASH,
+        ST_HIT, ST_DIE, 
+
+        ST_END 
+    }    
     public enum ATTRIBUTETYPE { AT_FIRE, AT_THUNDER, AT_END }
     public enum ATTACKTYPE { AT_NEAR, AT_FAR, AT_END }
 
@@ -51,7 +59,7 @@ public class Player : Character
     private AudioSource m_as;
 
     public float Stamina => m_stamina;
-    public ATTRIBUTETYPE AttributeType => m_attributeType;
+    public ATTRIBUTETYPE AttributeType { get => m_attributeType; set => m_attributeType = value; }
     public float Damage { get => m_damage; }
     public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = value; }
     public bool Invincibility { get => m_invincibility; set => m_invincibility = value; }
@@ -128,8 +136,14 @@ public class Player : Character
         states.Add(new Player_Dash(m_stateMachine));       // 2
         states.Add(new Player_AttackNear(m_stateMachine)); // 3
         states.Add(new Player_AttackFar(m_stateMachine));  // 4
-        states.Add(new Player_Hit(m_stateMachine));        // 5
-        states.Add(new Player_Die(m_stateMachine));        // 6
+
+        states.Add(new Player_AttackMaMove(m_stateMachine)); // 5
+        states.Add(new Player_AttackMaDash(m_stateMachine)); // 6
+        states.Add(new Player_AttackRaMove(m_stateMachine)); // 7
+        states.Add(new Player_AttackRaDash(m_stateMachine)); // 8
+
+        states.Add(new Player_Hit(m_stateMachine));        // 9
+        states.Add(new Player_Die(m_stateMachine));        // 10
         m_stateMachine.Initialize_State(states, (int)STATE.ST_IDLE);
     }
 
@@ -170,14 +184,25 @@ public class Player : Character
         switch (attackType)
         {
             case ATTACKTYPE.AT_NEAR:
-                m_stateMachine.Change_State((int)STATE.ST_ATTACKNEAR);
+                if (m_stateMachine.CurState == (int)STATE.ST_DASH)
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKNEAR_DASH);
+                else if (m_joystick.IsInput == true)
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKNEAR_MOVE);
+                else
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKNEAR);
                 break;
 
             case ATTACKTYPE.AT_FAR:
                 if (m_stamina < 5)
                     return;
                 Use_Stamina(5f);
-                m_stateMachine.Change_State((int)STATE.ST_ATTACKFAR);
+
+                if (m_stateMachine.CurState == (int)STATE.ST_DASH)
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKFAR_DASH);
+                else if (m_joystick.IsInput == true)
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKFAR_MOVE);
+                else
+                    m_stateMachine.Change_State((int)STATE.ST_ATTACKFAR);
                 break;
         }
     }
@@ -328,5 +353,29 @@ public class Player : Character
             dirName = DIRECTION.DT_RIGHT;
 
         return dirName;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_stateMachine == null)
+            return;
+
+        m_stateMachine.OnCollisionEnter2D(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (m_stateMachine == null)
+            return;
+
+        m_stateMachine.OnCollisionStay2D(collision);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (m_stateMachine == null)
+            return;
+
+        m_stateMachine.OnCollisionExit2D(collision);
     }
 }

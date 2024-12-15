@@ -118,12 +118,24 @@ public class Projectile : MonoBehaviour
                         m_spriteRenderer.enabled = false;
                 }
 
+
                 m_totalTime += Time.deltaTime;
-                if(m_totalTime > 1f)
+                if (m_totalTime > 2f)
                 {
                     m_totalTime = 0f;
-                    m_monster.Speed = m_monster.SpeedMax;
                     Destroy(gameObject);
+                }
+                else
+                {
+                    m_time += Time.deltaTime;
+                    if (m_time >= 0.5f) // 지속 피해
+                    {
+                        m_time = 0f;
+                        if (m_monster != null)
+                            m_monster.Damaged_Monster(1f, false);
+                        else
+                            Destroy(gameObject);
+                    }
                 }
             }
         }
@@ -141,11 +153,6 @@ public class Projectile : MonoBehaviour
             m_animator.SetTrigger("IsBoom");
 
             m_monster = collision.gameObject.GetComponent<Monster>();
-            if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
-            {
-                if(m_monster != null)
-                    m_monster.Speed = m_monster.SpeedMax * 0.5f; // 이동 속도 감소
-            }
         }
         else if(collision.CompareTag("Wall") == true)
         {

@@ -8,7 +8,7 @@ public class Player_AttackNear : Player_Attack
 
     public Player_AttackNear(StateMachine<Player> stateMachine) : base(stateMachine, 0)
     {
-        m_coolTime = 1f;
+        m_coolTime = 0f;
         m_animationName = "IsAttackNear";
     }
 
@@ -73,10 +73,11 @@ public class Player_AttackNear : Player_Attack
         }
 
         // 이펙트 생성
-        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Attack");
+        GameObject obj = GameManager.Ins.LoadCreate("4_Prefab/5_Effect/Attack", m_owner.transform);
         if (obj != null)
         {
             obj.transform.position = new Vector3(m_effectPoint.position.x + Random.Range(-0.05f, 0.05f), m_effectPoint.position.y + Random.Range(-0.05f, 0.05f), m_effectPoint.position.z);
+            obj.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
 
             // 방향 설정
             DIRECTION dirName = m_owner.Get_Direction();

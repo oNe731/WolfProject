@@ -111,7 +111,7 @@ public class Monster : Character
         m_collider2D = GetComponent<Collider2D>();
         m_animator = GetComponent<Animator>();
 
-        m_whiteFlashMat = GameManager.Ins.Load<Material>("5_Material/MonsterMaterial");
+        m_whiteFlashMat = GameManager.Ins.Load<Material>("6_Material/MonsterMaterial");
     }
 
     private void Update()

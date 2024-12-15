@@ -32,8 +32,6 @@ public class Player_Attack : Player_Base
     public override void Enter_State()
     {
         m_owner.AttackCool = true;
-
-        // UI º¯°æ
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         m_attack = false;

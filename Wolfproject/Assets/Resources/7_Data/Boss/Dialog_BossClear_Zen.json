@@ -1,0 +1,15 @@
+[
+  {
+    "profileSpr": "Portrait_Wolf",
+    "dialogText": "우리가 널 얼마나 걱정했는지 모른 단다.\n이제 안전하구나."
+  },
+  {
+    "profileSpr": "Portrait_Wolf",
+    "dialogText": "넌 진정한 용기와 배려를 보여줬어.\n무리가 널 항상 환영할 거야."
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "이제 내가 돌아갈 곳이 생겼어.\n그리고 나도 누군가를 도울 수 있는 존재라는 걸 알았어."
+  }
+  // 컷씬 씬으로 전환
+]

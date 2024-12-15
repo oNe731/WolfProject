@@ -1,0 +1,13 @@
+[
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "살아남는 건 각자의 몫이야."
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "제발... 날 두고 가지 마! 이렇게 죽고 싶지 않아..."
+  },
+  {
+    // 여행자 삭제
+  }
+]

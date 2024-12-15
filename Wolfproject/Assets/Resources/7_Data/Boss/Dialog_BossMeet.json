@@ -1,0 +1,30 @@
+[
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "드디어 숲을 빠져나올 수 있겠어!"
+  },
+  {
+    "profileSpr": "Portrait_Slime",
+    "dialogText": "잠깐 거기까지다."
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "왜 날 방해하는거지? 난 그냥 나가고 싶을 뿐이야!"
+  },
+  {
+    "profileSpr": "Portrait_Slime",
+    "dialogText": "아이야, 내가 관리하는 숲을 난장판으로 만들어 놓고 무사히 빠져나올 것이라 생각했느냐?"
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "그들이 먼저 공격을 했을 뿐이야! 난 반격을 한 것이지 내가 원해서 한 것이 아니야!"
+  },
+  {
+    "profileSpr": "Portrait_Slime",
+    "dialogText": "난 과정 따윈 상관없다. 어찌된 상황이든 결과만이 남을 뿐. 너는 숲을 어지럽혔는지라."
+  },
+  {
+    "profileSpr": "Portrait_Player",
+    "dialogText": "이렇게 된 이상 싸울 수 밖에…!"
+  }
+]

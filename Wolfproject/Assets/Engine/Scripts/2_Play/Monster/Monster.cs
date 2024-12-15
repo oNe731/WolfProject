@@ -53,7 +53,7 @@ public class Monster : Character
         if (m_hp <= 0)
         {
             m_hp = 0;
-            if(m_dieIndex != -1)
+            if(m_dieIndex != -1 && m_stateMachine.CurState != m_dieIndex)
                 m_stateMachine.Change_State(m_dieIndex);
         }
         else

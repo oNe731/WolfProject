@@ -32,7 +32,12 @@ public class SoundManager : MonoBehaviour
 
     private void Load_Resource()
     {
-        //*
+        m_bgm.Add("Cut_Intro",        GameManager.Ins.Load<AudioClip>("2_Sound/BGM/Cut/Intro"));
+        m_bgm.Add("Cut_Ending_Chaos", GameManager.Ins.Load<AudioClip>("2_Sound/BGM/Cut/Ending_Chaos"));
+        m_bgm.Add("Cut_Ending_Law",   GameManager.Ins.Load<AudioClip>("2_Sound/BGM/Cut/Ending_Law"));
+
+        m_bgm.Add("Play_Basic", GameManager.Ins.Load<AudioClip>("2_Sound/BGM/Play/Fight"));
+        m_bgm.Add("Play_Boss", GameManager.Ins.Load<AudioClip>("2_Sound/BGM/Play/BossBattle"));
     }
 
     public void Play_ManagerAudioSource(string name, bool loop, float speed)

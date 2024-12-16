@@ -60,7 +60,7 @@ public class Player_AttackNear : Player_Attack
 
     private void Check_AttackCollision(BoxCollider2D collider)
     {
-        m_owner.Play_AudioSource("Player_Melee", false, 1f, 1f);
+        m_owner.Play_AudioSource("Player_Melee", false, 1f, GameManager.Ins.Sound.EffectSound);
 
         // 특정 범위 안에 있는 모든 콜라이더를 가져옴 // OverlapCircle : 원 형태의 범위, 2D 물리 시스템
         Set_ColliderDirection();

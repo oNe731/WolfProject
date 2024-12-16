@@ -51,15 +51,9 @@ public class Projectile : MonoBehaviour
                 break;
         }
         if (m_type == Player.ATTRIBUTETYPE.AT_FIRE)
-        {
             m_animator.SetTrigger("IsFire");
-            m_player.Play_AudioSource("Player_fire", false, 1f, 1f);
-        }
         else if (m_type == Player.ATTRIBUTETYPE.AT_THUNDER)
-        {
             m_animator.SetTrigger("IsThunder");
-            m_player.Play_AudioSource("Player_lightning", false, 1f, 1f);
-        }
     }
 
     void Update()

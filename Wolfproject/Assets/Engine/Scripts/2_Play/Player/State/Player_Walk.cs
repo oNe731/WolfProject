@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player_Walk : Player_Base
 {
+    private float m_soundTime = 0f;
+
+
     public Player_Walk(StateMachine<Player> stateMachine) : base(stateMachine)
     {
     }
@@ -29,6 +32,7 @@ public class Player_Walk : Player_Base
             //else
             //    m_owner.MoveSpeed = 5f * 0.8f; // 20% °¨¼Ò
             Move_Player(m_owner.Joystick.InputVector);
+            Play_WalkSound();
         }
     }
 
@@ -38,5 +42,17 @@ public class Player_Walk : Player_Base
 
     public override void OnDrawGizmos()
     {
+    }
+
+    protected void Play_WalkSound()
+    {
+        m_soundTime += Time.deltaTime;
+        if (m_soundTime >= 0.4f)
+        {
+            m_soundTime = 0f;
+
+            int Index = Random.Range(0, 5);
+            m_owner.Play_AudioSource("Player_Walk_" + Index.ToString(), false, 1f, GameManager.Ins.Sound.EffectSound);
+        }
     }
 }

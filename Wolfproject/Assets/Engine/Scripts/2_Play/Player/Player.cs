@@ -165,7 +165,7 @@ public class Player : Character
     {
         Initialize_Character();
 
-        m_hpMax = 100f;
+        m_hpMax = 10f;
         m_hp = m_hpMax;
         for(int i = 0; i < m_hpSliders.Length; ++i)
         {

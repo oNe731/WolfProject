@@ -16,6 +16,8 @@ public class Player_Die : Player_Base
         // 애니메이션 변경
         m_owner.AM.SetTrigger("IsDeath");
         GameManager.Ins.Set_Pause(true);
+
+        m_owner.Play_AudioSource("Player_Dead", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

@@ -28,6 +28,8 @@ public class Player_Hit : Player_Base
         if (m_colorCorutine != null)
             m_owner.StopCoroutine(m_colorCorutine);
         m_colorCorutine = m_owner.StartCoroutine(Change_Color(new Color(1f, 1f, 1f, 1f), new Color(1f, 0f, 0f, 1f), 0.3f));
+
+        m_owner.Play_AudioSource("Player_Hit", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

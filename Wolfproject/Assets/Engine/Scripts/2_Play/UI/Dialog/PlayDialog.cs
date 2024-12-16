@@ -18,6 +18,13 @@ public class PlayDialog : MonoBehaviour
     private int m_dialogIndex = 0;
     private float m_typeSpeed = 0.05f;
 
+    private AudioSource m_audioSource;
+
+    public void Initialize()
+    {
+        m_audioSource = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (m_isUpdate == false)
@@ -49,6 +56,7 @@ public class PlayDialog : MonoBehaviour
             else // 다이얼로그 종료
             {
                 m_isUpdate = false;
+                m_audioSource.Stop();
 
                 GameManager.Ins.Set_Pause(false);
                 gameObject.SetActive(false);
@@ -108,4 +116,15 @@ public class PlayDialog : MonoBehaviour
         yield break;
     }
     #endregion
+
+    public void Play_AudioSource(string audioClip, bool loop, float speed, float volume)
+    {
+        m_audioSource.Stop();
+
+        m_audioSource.clip = GameManager.Ins.Play.Effect[audioClip];
+        m_audioSource.loop = loop;
+        m_audioSource.pitch = speed; // 기본1f
+        m_audioSource.volume = volume;
+        m_audioSource.Play();
+    }
 }

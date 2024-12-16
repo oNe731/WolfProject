@@ -24,10 +24,15 @@ public class Npc : MonoBehaviour
             m_talk = true;
             GameManager.Ins.Play.Dialog.Start_Dialog(m_path);
 
-            if (m_type == TYPE.TYPE_TREE1)
-                GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC1;
-            else if(m_type == TYPE.TYPE_TREE2)
-                GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC2;
+            if(m_type == TYPE.TYPE_TREE1 || m_type == TYPE.TYPE_TREE2)
+            {
+                GameManager.Ins.Play.Dialog.Play_AudioSource("Npc_Tree", true, 1f, GameManager.Ins.Sound.EffectSound);
+
+                if (m_type == TYPE.TYPE_TREE1)
+                    GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC1;
+                else if (m_type == TYPE.TYPE_TREE2)
+                    GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC2;
+            }
         }
     }
 

@@ -13,6 +13,7 @@ public class Player_AttackMaDash : Player_Base
     private Image m_buttonSprite;
     private TMP_Text m_text;
 
+    private bool m_isSound = false;
     private GameObject m_trail;
 
     public Player_AttackMaDash(StateMachine<Player> stateMachine) : base(stateMachine)
@@ -39,7 +40,7 @@ public class Player_AttackMaDash : Player_Base
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         m_owner.AM.SetTrigger("IsAttackMaDash");
-        m_owner.Play_AudioSource("Player_dash", false, 1f, 1f);
+        m_isSound = false; // m_owner.Play_AudioSource("Player_Melee_Dash", false, 1f, GameManager.Ins.Sound.EffectSound);
 
         m_trail.SetActive(true);
         m_owner.Invincibility = true; // ¹«Àû
@@ -63,10 +64,19 @@ public class Player_AttackMaDash : Player_Base
                     return;
                 }
             }
-            else if (animTime >= 0.6f && animTime <= 0.75f)
-                Move_Player(m_direct);
-            else
-                m_owner.Rb.velocity = Vector2.zero;
+            else if(animTime >= 0.5f)
+            {
+                if (m_isSound == false)
+                {
+                    m_isSound = true;
+                    m_owner.Play_AudioSource("Player_Melee_Dash", false, 1f, GameManager.Ins.Sound.EffectSound);
+                }
+
+                if (animTime >= 0.6f && animTime <= 0.75f)
+                    Move_Player(m_direct);
+                else
+                    m_owner.Rb.velocity = Vector2.zero;
+            }
         }
     }
 

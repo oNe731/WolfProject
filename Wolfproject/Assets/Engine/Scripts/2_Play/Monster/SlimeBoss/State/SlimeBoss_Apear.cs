@@ -19,6 +19,7 @@ public class SlimeBoss_Apear : SlimeBoss_Base
         {
             m_stateMachine.Change_State((int)SlimeBoss.STATE.ST_IDLE);
             GameManager.Ins.Play.Dialog.Start_Dialog("7_Data/Boss/Dialog_BossMeet");
+            GameManager.Ins.Sound.Play_AudioSourceBGM("Play_Boss", true, 1f);
         }
     }
 

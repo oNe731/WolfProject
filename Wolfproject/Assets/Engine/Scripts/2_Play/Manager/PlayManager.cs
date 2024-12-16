@@ -35,6 +35,7 @@ public class PlayManager : ScenesManager
 
     protected override void Load_Resource()
     {
+        // 이미지
         m_profileSpr.Add("Portrait_NPC_Happy", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_NPC_Happy"));
         m_profileSpr.Add("Portrait_NPC_Sad",   GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_NPC_Sad"));
         m_profileSpr.Add("Portrait_Player",    GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Player"));
@@ -42,13 +43,31 @@ public class PlayManager : ScenesManager
         m_profileSpr.Add("Portrait_Tree",      GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Tree"));
         m_profileSpr.Add("Portrait_Wolf",      GameManager.Ins.Load<Sprite>("1_Graphic/UI/Chating/Portrait_Wolf"));
 
+        // 사운드
+        // 플레이어
+        m_effect.Add("Player_Melee",       GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/Melee"));
+        m_effect.Add("Player_Ranged",      GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/Ranged"));
+        m_effect.Add("Player_Melee_Dash",  GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/MA_Dash"));
+        m_effect.Add("Player_Melee_Move",  GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/MA_Move"));
+        m_effect.Add("Player_Ranged_Dash", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/RA_Dash"));
+        m_effect.Add("Player_Ranged_Move", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Attack/RA_Move"));
 
-        m_effect.Add("Player_Melee", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/Melee"));
-        m_effect.Add("Player_fire", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/fire"));
-        m_effect.Add("Player_lightning", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/Attack/lightning"));
-        m_effect.Add("Player_dash", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/dash"));
-        
-        m_effect.Add("Player_run", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Player/run"));
+        m_effect.Add("Player_Dash", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Dash"));
+
+        m_effect.Add("Player_Walk_0", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Walk/Walk_0"));
+        m_effect.Add("Player_Walk_1", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Walk/Walk_1"));
+        m_effect.Add("Player_Walk_2", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Walk/Walk_2"));
+        m_effect.Add("Player_Walk_3", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Walk/Walk_3"));
+        m_effect.Add("Player_Walk_4", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Input/Etc/Walk/Walk_4"));
+
+        m_effect.Add("Player_Hit",  GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Damaged/Hit"));
+        m_effect.Add("Player_Dead", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/1_Player/Damaged/Dead"));
+
+        // NPC
+        m_effect.Add("Npc_Tree", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/3_Npc/TreeTalk"));
+
+
+
         m_effect.Add("Enemy_damaged", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Enemy/damaged"));
     }
 
@@ -67,6 +86,7 @@ public class PlayManager : ScenesManager
         m_playPanel = canvas.transform.Find("Panel_Play").gameObject;
         m_overPanel = canvas.transform.Find("Panel_Over").gameObject;
         m_dialog = canvas.transform.Find("Panel_Dialog").gameObject.GetComponent<PlayDialog>();
+        m_dialog.Initialize();
 
         m_levelState = LEVELSTATE.STATE_START;
 
@@ -115,6 +135,7 @@ public class PlayManager : ScenesManager
         m_overPanel.SetActive(false);
         m_player.Restart_Player(m_levelState);
 
+        GameManager.Ins.Sound.Play_AudioSourceBGM("Play_Basic", true, 1f);
         GameManager.Ins.UI.Start_FadeIn(1f, Color.black, () => Start_Game());
     }
 }

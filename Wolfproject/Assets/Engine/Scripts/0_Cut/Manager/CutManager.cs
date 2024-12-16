@@ -52,13 +52,20 @@ public class CutManager : ScenesManager
         {
             case (int)GameManager.SCENE.SCENE_MAIN: // ÀÎÆ®·Î ÄÆ¾À Ãâ·Â
                 path += "Dialog_Intro";
+                GameManager.Ins.Sound.Play_AudioSourceBGM("Cut_Intro", true, 1f);
                 break;
 
             case (int)GameManager.SCENE.SCENE_PLAY: // ¼±, È¥µ· Á¡¼ö¿¡ µû¸¥ ¿£µù ÄÆ¾À Ãâ·Â
                 if(GameManager.Ins.ZenScore > GameManager.Ins.ChaosScore)
+                {
                     path += "Dialog_EndingS";
+                    GameManager.Ins.Sound.Play_AudioSourceBGM("Cut_Ending_Law", true, 1f);
+                }
                 else
+                {
                     path += "Dialog_EndingF";
+                    GameManager.Ins.Sound.Play_AudioSourceBGM("Cut_Ending_Chaos", true, 1f);
+                }
                 break;
 
             default:

@@ -17,6 +17,7 @@ public class Player_AttackMaMove : Player_Attack
     public override void Enter_State()
     {
         base.Enter_State();
+        m_owner.Play_AudioSource("Player_Melee_Move", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()
@@ -57,8 +58,6 @@ public class Player_AttackMaMove : Player_Attack
 
     private void Check_AttackCollision(BoxCollider2D collider)
     {
-        m_owner.Play_AudioSource("Player_Melee", false, 1f, 1f);
-
         // 특정 범위 안에 있는 모든 콜라이더를 가져옴 // OverlapCircle : 원 형태의 범위, 2D 물리 시스템
         Set_ColliderDirection();
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(collider.transform.position, m_distance, LayerMask.GetMask("Monster"));

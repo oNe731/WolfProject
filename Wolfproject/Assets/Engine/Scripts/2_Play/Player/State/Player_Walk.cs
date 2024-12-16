@@ -24,10 +24,10 @@ public class Player_Walk : Player_Base
         }
         else
         {
-            if (m_owner.Stamina > 0)
-                m_owner.MoveSpeed = 5f;        // 기본 이동 속도
-            else
-                m_owner.MoveSpeed = 5f * 0.8f; // 20% 감소
+            //if (m_owner.Stamina > 0)
+            //    m_owner.MoveSpeed = 5f;        // 기본 이동 속도
+            //else
+            //    m_owner.MoveSpeed = 5f * 0.8f; // 20% 감소
             Move_Player(m_owner.Joystick.InputVector);
         }
     }

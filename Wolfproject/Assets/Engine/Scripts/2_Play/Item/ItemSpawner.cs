@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
+    [SerializeField] private Item.TYPE m_itemMapType;
     [SerializeField] private ItemData.TYPE[] m_itemType;
     [SerializeField] private int[] m_itemCount;
 
@@ -37,7 +38,10 @@ public class ItemSpawner : MonoBehaviour
             for (int j = 0; j < m_itemCount[i]; j++)
             {
                 Vector2 spawnPosition = Get_RandomPosition();
-                Instantiate(gameObject, spawnPosition, Quaternion.identity, transform);
+                GameObject Items = Instantiate(gameObject, spawnPosition, Quaternion.identity, transform);
+
+                if(m_itemMapType != Item.TYPE.TYPE_END)
+                    Items.GetComponent<Item>().Set_MapType(m_itemMapType);
             }
         }
     }

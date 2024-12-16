@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public enum ITEMTYPE { TYPE_END, TYPE_MONSTER, TYPE_GROUP }
+
+    [SerializeField] private Item.TYPE m_mapType;
     [SerializeField] private Monster.TYPE[] m_monsterType;
     [SerializeField] private int[] m_monsterCount;
+
+    [SerializeField] private ITEMTYPE m_itemCreateType;
+    [SerializeField] private ItemData.TYPE[] m_itemTypes;
+    [SerializeField] private float[] m_itemProbability;
 
     private BoxCollider2D m_boxCollider;
 
@@ -46,7 +53,26 @@ public class Spawner : MonoBehaviour
                     Monster monster = obj.GetComponent<Monster>();
                     if (monster != null)
                     {
+                        monster.MapType = m_mapType;
                         monster.spawner = this;
+
+                        // 몬스터 당 드랍할 수 있는 아이템 개수 0 - 1개
+                        if(m_itemCreateType == ITEMTYPE.TYPE_MONSTER)
+                        {
+                            // 특정 적 처치 시 + 확률
+                            int randomChance = Random.Range(0, 100);
+                            if (randomChance <= m_itemProbability[i])
+                                monster.ItemType = m_itemTypes[i];
+                        }
+                        else if (m_itemCreateType == ITEMTYPE.TYPE_GROUP)
+                        {
+                            // 특정 구역 적 처치 시 + 확률
+                            int RandomIndex = Random.Range(0, m_itemTypes.Length);
+
+                            int randomChance = Random.Range(0, 100);
+                            if (randomChance <= m_itemProbability[RandomIndex])
+                                monster.ItemType = m_itemTypes[RandomIndex];
+                        }
                     }
                 }
             }

@@ -41,7 +41,7 @@ public class Player_Dash : Player_Base
         m_time = 0f;
 
         m_direct = m_owner.Get_Direction(m_owner.Joystick.InputVector);
-        m_owner.MoveSpeed = 10f; // 대쉬 이동 속도
+        m_owner.MoveSpeed *= 2f; // 대쉬 이동 속도 2배
 
         // UI 변경
         m_buttonSprite.color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -82,6 +82,8 @@ public class Player_Dash : Player_Base
         Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayer, false);
         Physics2D.IgnoreLayerCollision(m_playerLayerK, m_monsterLayerK, false);
         m_trail.SetActive(false);
+
+        m_owner.MoveSpeed /= 2f;
     }
 
     public override void OnDrawGizmos()

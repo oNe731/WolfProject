@@ -25,6 +25,9 @@ public class Monster : Character
     private Material m_whiteFlashMat;
     private Coroutine m_whiteCoroutine = null;
 
+    private Item.TYPE m_mapType;
+    private ItemData.TYPE m_itemType = ItemData.TYPE.IT_END;
+
     public float Hp { get => m_hp; }
     public float HpMax { get => m_hpMax; }
     public float Speed { get => m_speed; set => m_speed = value; }
@@ -44,6 +47,9 @@ public class Monster : Character
     public SpriteRenderer SpriteRenderer { get => m_spriteRenderer; }
     public Collider2D Collider2D { get => m_collider2D; }
     public Animator Animator { get => m_animator; }
+
+    public Item.TYPE MapType { get => m_mapType; set => m_mapType = value; }
+    public ItemData.TYPE ItemType { get => m_itemType; set => m_itemType = value; }
 
     public void Damaged_Monster(float damage, bool knockedBack = true, float knockBackThrust = 2f)
     {
@@ -125,5 +131,29 @@ public class Monster : Character
             return;
 
         m_stateMachine.OnDrawGizmos();
+    }
+
+    public void Create_Item()
+    {
+        if (m_itemType == ItemData.TYPE.IT_END)
+            return;
+
+        GameObject gameObject = null;
+        switch (m_itemType)
+        {
+            case ItemData.TYPE.IT_HP:
+                gameObject = GameManager.Ins.Load<GameObject>("4_Prefab/4_Item/Recovery");
+                break;
+            case ItemData.TYPE.IT_BUFF:
+                gameObject = GameManager.Ins.Load<GameObject>("4_Prefab/4_Item/Speed");
+                break;
+            case ItemData.TYPE.IT_SHIELD:
+                gameObject = GameManager.Ins.Load<GameObject>("4_Prefab/4_Item/Defense");
+                break;
+        }
+
+        GameObject Items = Instantiate(gameObject, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f), Quaternion.identity);
+        if (m_mapType != Item.TYPE.TYPE_END)
+            Items.GetComponent<Item>().Set_MapType(m_mapType);
     }
 }

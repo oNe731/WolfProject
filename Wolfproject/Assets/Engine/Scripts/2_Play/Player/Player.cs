@@ -18,6 +18,7 @@ public class Player : Character
     public enum ATTACKTYPE { AT_NEAR, AT_FAR, AT_END }
 
     [SerializeField] private Slider[] m_hpSliders;
+    [SerializeField] private Slider[] m_shieldSliders;
     [SerializeField] private Slider[] m_staminaSliders;
     [SerializeField] private Joystick m_joystick;
     [SerializeField] private UIBlood uiBlood;
@@ -27,16 +28,20 @@ public class Player : Character
     [SerializeField] private Sprite[] m_buttonSprite;
 
     private UISliderOwner m_hpSlider;
+    private UISliderOwner m_shieldSlider;
     private UISliderOwner m_staminaSlider;
 
     private float m_hp;
     private float m_hpMax;
+    private float m_shield;
+    private float m_shieldMax;
     private float m_stamina;
     private float m_staminaMax;
     private float m_damage;
 
     private ATTRIBUTETYPE m_attributeType = ATTRIBUTETYPE.AT_FIRE;
     private float m_moveSpeed = 5f;
+    private float m_moveSpeedMax = 10f;
 
     private bool m_recover = false;
     private float m_recoverTime = 0f;
@@ -61,7 +66,8 @@ public class Player : Character
     public float Stamina => m_stamina;
     public ATTRIBUTETYPE AttributeType { get => m_attributeType; set => m_attributeType = value; }
     public float Damage { get => m_damage; }
-    public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = value; }
+    public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = Mathf.Min(value, m_moveSpeedMax); }
+    public float MoveSpeedMax { get => m_moveSpeedMax; }
     public bool Invincibility { get => m_invincibility; set => m_invincibility = value; }
     public bool Dash { get => m_dash; set => m_dash = value; }
     public bool DashCool { get => m_dashCool; set => m_dashCool = value; }
@@ -73,10 +79,36 @@ public class Player : Character
     public Rigidbody2D Rb => m_rb;
     public Animator AM => m_am;
 
+    private bool m_activeShield = false;
+    private float m_shieldTime = 0f;
+    private float m_shieldTimeMax = 10f;
+
+    private bool m_activeBuff = false;
+    private float m_buffTime = 0f;
+    private float m_buffTimeMax = 5f;
+
     public void Damaged_Player(float damage)
     {
         if (m_invincibility == true) // 무적 상태
             return;
+
+        // 방어막
+        if(m_activeShield == true)
+        {
+            m_shield -= damage;
+            if (m_shield <= 0)
+            {
+                // 효과 비활성화
+                m_activeShield = false;
+
+                m_shield = 0f;
+                m_shieldSlider.gameObject.SetActive(false);
+                return;
+            }
+
+            m_shieldSlider.Set_Slider(m_shield);
+            return;
+        }
 
         m_hp -= damage;
         m_hpSlider.Set_Slider(m_hp);
@@ -95,6 +127,39 @@ public class Player : Character
         m_stateMachine.Change_State((int)STATE.ST_HIT);
     }
 
+    public void Recover_Player(float recover)
+    {
+        m_hp += recover;
+        if (m_hp > m_hpMax)
+            m_hp = m_hpMax;
+        m_hpSlider.Set_Slider(m_hp);
+
+        if (m_hp <= m_hpMax * 0.2f)
+            uiBlood.Start_Blood();
+        else
+            uiBlood.Stop_Blood();
+    }
+
+    public void Active_Shield()
+    {
+        m_activeShield = true;
+        m_shieldTime = 0f;
+
+        m_shield = m_shieldMax;
+        m_shieldSlider.Set_Slider(m_shield);
+
+        m_shieldSlider.gameObject.SetActive(true);
+    }
+
+    public void Active_Buff()
+    {
+        m_activeBuff = true;
+        m_buffTime = 0f;
+
+        MoveSpeed *= 1.2f; // + 20% 증가
+        transform.GetChild(4).gameObject.SetActive(true); // 버프 이펙트 활성화
+    }
+
     private void Start()
     {
         Initialize_Character();
@@ -109,6 +174,18 @@ public class Player : Character
         m_hpSlider = m_hpSliders[0].GetComponent<UISliderOwner>();
         m_hpSlider.Initialize();
         m_hpSlider.Set_Slider(m_hp);
+
+        // 쉴드
+        m_shieldMax = 20f;
+        m_shield = 0;
+        for (int i = 0; i < m_shieldSliders.Length; ++i)
+        {
+            m_shieldSliders[i].maxValue = m_hpMax;
+            m_shieldSliders[i].value = m_shield;
+        }
+        m_shieldSlider = m_shieldSliders[0].GetComponent<UISliderOwner>();
+        m_shieldSlider.Initialize(m_shieldMax);
+        m_shieldSlider.Set_Slider(m_shield);
 
         m_staminaMax = 50f;
         m_stamina = m_staminaMax;
@@ -152,27 +229,55 @@ public class Player : Character
         if (GameManager.Ins.IsGame == false && m_stateMachine.CurState != (int)STATE.ST_DIE)
             return;
 
+        // 스테미나
         if (m_recover == true)
             Recover_Stamina();
 
+        // 방어막
+        if(m_activeShield == true)
+        {
+            m_shieldTime += Time.deltaTime;
+            if(m_shieldTime >= m_shieldTimeMax)
+            {
+                // 효과 비활성화
+                m_activeShield = false;
+
+                m_shield = 0f;
+                m_shieldSlider.gameObject.SetActive(false);
+            }
+        }
+
+        // 속도 버프
+        if(m_activeBuff == true)
+        {
+            m_buffTime += Time.deltaTime;
+            if (m_buffTime >= m_buffTimeMax)
+            {
+                m_activeBuff = false;
+
+                // 효과 비활성화
+                MoveSpeed /= 1.2f;
+                transform.GetChild(4).gameObject.SetActive(false); // 버프 이펙트 비활성화
+            }
+        }
+
+        // 스턴
         if(m_isSturn == true)
         {
             m_sturnTime += Time.deltaTime;
             if(m_sturnTime >= m_isSturnTime)
             {
-                m_sturnTime = 0f;
                 m_isSturn = false;
-                //Debug.Log("스턴 종료");
+                m_sturnTime = 0f;
             }
             return;
         }
 
-        if (m_stateMachine == null)
-            return;
-
         AM.SetFloat("X", m_joystick.InputVector.x);
         AM.SetFloat("Y", m_joystick.InputVector.y);
 
+        if (m_stateMachine == null)
+            return;
         m_stateMachine.Update_State();
     }
 
@@ -272,12 +377,12 @@ public class Player : Character
         m_staminaSlider.Set_Slider(m_stamina);
 
         // 10이하일 때 경고 색상으로 변경
-        Color color;
-        if (m_stamina <= 10) 
-            color = new Color(1f, 0f, 0f, 1f); // 빨간색
-        else
-            color = new Color(0.3603774f, 0.5231216f, 1f, 1f); // 파란색
-        m_staminaSlider.FillImage.color = color;
+        //Color color;
+        //if (m_stamina <= 10) 
+        //    color = new Color(1f, 0f, 0f, 1f); // 빨간색
+        //else
+        //    color = new Color(0.3603774f, 0.5231216f, 1f, 1f); // 파란색
+        //m_staminaSlider.FillImage.color = color;
     }
 
 

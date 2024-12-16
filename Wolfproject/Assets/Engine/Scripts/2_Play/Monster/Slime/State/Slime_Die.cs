@@ -31,6 +31,7 @@ public class Slime_Die : Slime_Base
                 m_time += Time.deltaTime;
                 if (m_time > 0.5f)
                 {
+                    m_owner.Create_Item();
                     GameManager.Ins.Destroy(m_owner.gameObject);
                 }
             }

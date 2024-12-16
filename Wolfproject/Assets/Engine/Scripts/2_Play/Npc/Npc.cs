@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Npc : MonoBehaviour
 {
+    public enum TYPE { TYPE_END, TYPE_TREE1, TYPE_TREE2, TYPE_TRAVEL }
+
+    [SerializeField] private TYPE m_type;
     [SerializeField] private string m_path;
     [SerializeField] private float m_dist;
     private bool m_talk = false;
@@ -20,6 +23,11 @@ public class Npc : MonoBehaviour
         {
             m_talk = true;
             GameManager.Ins.Play.Dialog.Start_Dialog(m_path);
+
+            if (m_type == TYPE.TYPE_TREE1)
+                GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC1;
+            else if(m_type == TYPE.TYPE_TREE2)
+                GameManager.Ins.Play.LevelState = PlayManager.LEVELSTATE.STATE_TREENPC2;
         }
     }
 

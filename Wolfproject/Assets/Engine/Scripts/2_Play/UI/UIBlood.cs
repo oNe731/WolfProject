@@ -23,7 +23,7 @@ public class UIBlood : MonoBehaviour
 
     public void Stop_Blood()
     {
-        if (m_isBlick == false || GameManager.Ins.IsGame == false)
+        if (m_isBlick == false)
             return;
 
         if (m_coroutine != null)

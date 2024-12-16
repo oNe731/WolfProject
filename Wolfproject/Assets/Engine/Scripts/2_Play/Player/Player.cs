@@ -116,7 +116,8 @@ public class Player : Character
         if (m_hp <= 0)
         {
             m_hp = 0;
-            m_stateMachine.Change_State((int)STATE.ST_DIE);
+            if(m_stateMachine.CurState != (int)STATE.ST_DIE)
+                m_stateMachine.Change_State((int)STATE.ST_DIE);
             return;
         }
 
@@ -482,5 +483,48 @@ public class Player : Character
             return;
 
         m_stateMachine.OnCollisionExit2D(collision);
+    }
+
+    public void Restart_Player(PlayManager.LEVELSTATE levelState)
+    {
+        if (levelState == PlayManager.LEVELSTATE.STATE_TREENPC1)
+            transform.position = new Vector3(28.33f, 16.74f, 0f);
+        else if (levelState == PlayManager.LEVELSTATE.STATE_TREENPC2)
+            transform.position = new Vector3(84.6f, -41.53f, 0f);
+        else
+            transform.position = new Vector3(-45.9f, 15.72f, 0f);
+
+        m_hp = m_hpMax;
+        m_hpSlider.Set_Slider(m_hp);
+        uiBlood.Stop_Blood();
+
+        m_stamina = m_staminaMax;
+        m_staminaSlider.Set_Slider(m_stamina);
+
+        m_shield = 0f;
+        m_activeShield = false;
+        m_shieldSlider.gameObject.SetActive(false);
+
+        m_activeBuff = false;
+        transform.GetChild(4).gameObject.SetActive(false);
+
+        m_attributeType = ATTRIBUTETYPE.AT_FIRE;
+
+        m_joystick.InputVector = new Vector2(0f, -1f);
+        AM.SetFloat("X", m_joystick.InputVector.x);
+        AM.SetFloat("Y", m_joystick.InputVector.y);
+
+        m_moveSpeed = 5f;
+        m_rb.isKinematic = false;
+
+        m_invincibility = false;
+        m_dash = false;
+        m_dashCool = false;
+        m_attackCool = false;
+        m_isSturn = false;
+        m_recover = false;
+        m_recoverTime = 0f;
+
+        m_stateMachine.Change_State((int)STATE.ST_IDLE);
     }
 }

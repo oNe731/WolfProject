@@ -40,6 +40,7 @@ public class Player_Die : Player_Base
 
     public override void Exit_State()
     {
+        m_dieEvent = false;
     }
 
     public override void OnDrawGizmos()

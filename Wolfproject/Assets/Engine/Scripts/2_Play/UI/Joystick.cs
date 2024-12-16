@@ -15,7 +15,7 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 m_startPosition;
 
     public bool IsInput => m_isInput;
-    public Vector2 InputVector => m_inputVector;
+    public Vector2 InputVector { get => m_inputVector; set => m_inputVector = value; }
 
     private void Awake()
     {

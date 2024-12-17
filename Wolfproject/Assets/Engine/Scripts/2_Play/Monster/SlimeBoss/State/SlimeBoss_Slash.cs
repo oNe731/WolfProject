@@ -65,6 +65,7 @@ public class SlimeBoss_Slash : SlimeBoss_Base
                     {
                         m_attack = true;
                         Check_AttackCollision(m_attackCollider);
+                        m_owner.Play_AudioSource("KingSlime_GroundSlam", false, 2f, GameManager.Ins.Sound.EffectSound);
                     }
                     else
                     {

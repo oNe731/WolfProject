@@ -11,7 +11,7 @@ public class Player_AttackMaMove : Player_Attack
         m_coolTime = 0f;
         m_animationName = "IsAttackMaMove";
 
-        m_damage = 2f;
+        m_damage = 3f;
     }
 
     public override void Enter_State()

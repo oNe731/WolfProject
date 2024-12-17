@@ -10,6 +10,6 @@ public class ItemHp : Item
         //itemData.itemType = ItemData.TYPE.IT_HP;
         //itemData.count = 1;
         // GameManager.Ins.Play.Player.Inven.Add_Item(itemData);
-        GameManager.Ins.Play.Player.Recover_Player(20f);
+        GameManager.Ins.Play.Player.Recover_Player(5f);
     }
 }

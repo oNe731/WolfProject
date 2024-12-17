@@ -18,6 +18,8 @@ public class Mushroom_RunAway : Mushroom_Base
         m_owner.Speed = m_owner.SpeedMax;
 
         m_owner.Animator.SetTrigger("Is_Walk");
+        m_owner.Play_AudioSource("Mushroom_Walk", false, 1f, GameManager.Ins.Sound.EffectSound);
+        //Debug.Log("사운드 재생5");
     }
 
     public override void Update_State()

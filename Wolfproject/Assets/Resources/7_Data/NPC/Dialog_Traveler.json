@@ -1,5 +1,24 @@
 [
   {
-    "profileSpr": "Portrait_Player",
-    "dialogText": "여기는 왜 이렇게 조용할까? 무리도 부모님도 모두 어딨지...\n내가 가는 길이 맞는 건지 모르겠어."
+    "dataType": 2,
+    "profileSpr": "",
+    "dialogText": "",
+
+    "choiceText": [
+      "구출",
+      "방치"
+    ],
+    "choiceDialog": [
+      "7_Data/NPC/Dialog_Traveler_Rescue",
+      "7_Data/NPC/Dialog_Traveler_Neglect"
+    ],
+    "choicePoint": [
+      1,
+      2
+    ],
+    "choiceValue": [
+      10,
+      10
+    ]
   }
+]

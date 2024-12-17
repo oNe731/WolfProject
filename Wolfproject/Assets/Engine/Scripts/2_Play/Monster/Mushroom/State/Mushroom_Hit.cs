@@ -16,6 +16,9 @@ public class Mushroom_Hit : Mushroom_Base
         m_owner.Animator.SetTrigger("Is_Idle");
 
         //Debug.Log("피격 시작");
+
+        m_owner.Play_AudioSource("Mushroom_Hit", false, 1f, GameManager.Ins.Sound.EffectSound);
+        //Debug.Log("사운드 재생4");
     }
 
     public override void Update_State()

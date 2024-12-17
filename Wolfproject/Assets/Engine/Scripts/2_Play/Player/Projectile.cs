@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     private float m_speedMax = 5f;
     private float m_speed = 0f;
 
-    private float m_time = 0f;
+    //private float m_time = 0f;
     private float m_totalTime = 0f;
     private Monster m_monster = null;
     private Player m_player = null;
@@ -19,7 +19,9 @@ public class Projectile : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
 
-    public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct, DIRECTION dirName)
+    private float m_damage;
+
+    public void Start_Projectile(Vector3 startPosition, Player.ATTRIBUTETYPE type, Vector2 direct, DIRECTION dirName, float damage)
     {
         if (GameManager.Ins.CurScene == (int)GameManager.SCENE.SCENE_TUTORIAL)
             m_player = GameManager.Ins.Tutorial.Player;
@@ -31,6 +33,7 @@ public class Projectile : MonoBehaviour
 
         m_type = type;
         m_direction = direct.normalized;
+        m_damage = damage;
 
         transform.position = startPosition + (new Vector3(m_direction.x, m_direction.y, 0f) * 0.1f);
 
@@ -81,25 +84,9 @@ public class Projectile : MonoBehaviour
                 {
                     float animTime = m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                     if (animTime >= 1.0f)
-                        m_spriteRenderer.enabled = false;
-                }
-
-                m_totalTime += Time.deltaTime;
-                if (m_totalTime > 2f)
-                {
-                    m_totalTime = 0f;
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    m_time += Time.deltaTime;
-                    if (m_time >= 0.5f) // 지속 피해
                     {
-                        m_time = 0f;
-                        if (m_monster != null)
-                            m_monster.Damaged_Monster(0.5f, false);
-                        else
-                            Destroy(gameObject);
+                        m_spriteRenderer.enabled = false;
+                        Destroy(gameObject);
                     }
                 }
             }
@@ -109,26 +96,9 @@ public class Projectile : MonoBehaviour
                 {
                     float animTime = m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
                     if (animTime >= 1.0f)
-                        m_spriteRenderer.enabled = false;
-                }
-
-
-                m_totalTime += Time.deltaTime;
-                if (m_totalTime > 2f)
-                {
-                    m_totalTime = 0f;
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    m_time += Time.deltaTime;
-                    if (m_time >= 0.5f) // 지속 피해
                     {
-                        m_time = 0f;
-                        if (m_monster != null)
-                            m_monster.Damaged_Monster(1f, false);
-                        else
-                            Destroy(gameObject);
+                        m_spriteRenderer.enabled = false;
+                        Destroy(gameObject);
                     }
                 }
             }
@@ -147,6 +117,7 @@ public class Projectile : MonoBehaviour
             m_animator.SetTrigger("IsBoom");
 
             m_monster = collision.gameObject.GetComponent<Monster>();
+            m_monster.Damaged_Monster(m_damage, false);
         }
         else if(collision.CompareTag("Wall") == true)
         {

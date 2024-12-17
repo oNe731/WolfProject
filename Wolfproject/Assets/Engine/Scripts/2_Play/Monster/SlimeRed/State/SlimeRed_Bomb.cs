@@ -20,6 +20,8 @@ public class SlimeRed_Bomb : SlimeRed_Base
 
             float size = Random.Range(0.4f, 1f);
             obj.transform.localScale = new Vector3(size, size, 1f);
+
+            m_owner.Play_AudioSource("Slime_Death", false, 1f, GameManager.Ins.Sound.EffectSound);
         }
 
         m_stateMachine.Change_State((int)SlimeRed.STATE.ST_DIE);

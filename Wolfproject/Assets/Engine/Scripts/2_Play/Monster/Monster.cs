@@ -5,6 +5,9 @@ public class Monster : Character
 {
     public enum TYPE { TYPE_SLIME, TYPE_MUSHROOM, TYPE_SLIMEBOSS, TYPE_SLIMERED, TYPE_END }
 
+    [SerializeField] protected Spawner m_spawner;
+    [SerializeField] protected int m_startStateIndex;
+
     protected float m_hp;
     protected float m_hpMax;
 
@@ -40,13 +43,15 @@ public class Monster : Character
     private SpriteRenderer m_spriteRenderer;
     private Collider2D m_collider2D;
     private Animator m_animator;
+    private AudioSource m_audioSource;
 
-    private Spawner m_spawner;
+    public StateMachine<Monster> StateMachine { get => m_stateMachine; }
     public Spawner spawner { get => m_spawner; set => m_spawner = value; }
     public Rigidbody2D Rigidbody2D { get => m_rigidbody2D; }
     public SpriteRenderer SpriteRenderer { get => m_spriteRenderer; }
     public Collider2D Collider2D { get => m_collider2D; }
     public Animator Animator { get => m_animator; }
+    public AudioSource AudioSource { get => m_audioSource; }
 
     public Item.TYPE MapType { get => m_mapType; set => m_mapType = value; }
     public ItemData.TYPE ItemType { get => m_itemType; set => m_itemType = value; }
@@ -116,6 +121,7 @@ public class Monster : Character
         m_defaultMat = m_spriteRenderer.material;
         m_collider2D = GetComponent<Collider2D>();
         m_animator = GetComponent<Animator>();
+        m_audioSource = GetComponent<AudioSource>();
 
         m_whiteFlashMat = GameManager.Ins.Load<Material>("6_Material/MonsterMaterial");
     }
@@ -155,5 +161,21 @@ public class Monster : Character
         GameObject Items = Instantiate(gameObject, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0f), Quaternion.identity);
         if (m_mapType != Item.TYPE.TYPE_END)
             Items.GetComponent<Item>().Set_MapType(m_mapType);
+    }
+
+    public void Play_AudioSource(string audioClip, bool loop, float speed, float volume)
+    {
+        m_audioSource.Stop();
+
+        m_audioSource.clip = GameManager.Ins.Play.Effect[audioClip];
+        m_audioSource.loop = loop;
+        m_audioSource.pitch = speed; // ±âº»1f
+        m_audioSource.volume = volume;
+        m_audioSource.Play();
+    }
+
+    public void Stop_AudioSource()
+    {
+        m_audioSource.Stop();
     }
 }

@@ -37,11 +37,11 @@ public class Player : Character
     private float m_shieldMax;
     private float m_stamina;
     private float m_staminaMax;
-    private float m_damage;
 
     private ATTRIBUTETYPE m_attributeType = ATTRIBUTETYPE.AT_FIRE;
-    private float m_moveSpeed = 5f;
+    private float m_moveSpeedStart = 5f;
     private float m_moveSpeedMax = 10f;
+    private float m_moveSpeed;
 
     private bool m_recover = false;
     private float m_recoverTime = 0f;
@@ -65,7 +65,6 @@ public class Player : Character
 
     public float Stamina => m_stamina;
     public ATTRIBUTETYPE AttributeType { get => m_attributeType; set => m_attributeType = value; }
-    public float Damage { get => m_damage; }
     public float MoveSpeed { get => m_moveSpeed; set => m_moveSpeed = Mathf.Min(value, m_moveSpeedMax); }
     public float MoveSpeedMax { get => m_moveSpeedMax; }
     public bool Invincibility { get => m_invincibility; set => m_invincibility = value; }
@@ -81,7 +80,7 @@ public class Player : Character
 
     private bool m_activeShield = false;
     private float m_shieldTime = 0f;
-    private float m_shieldTimeMax = 10f;
+    private float m_shieldTimeMax = 5f;
 
     private bool m_activeBuff = false;
     private float m_buffTime = 0f;
@@ -157,6 +156,7 @@ public class Player : Character
         m_activeBuff = true;
         m_buffTime = 0f;
 
+        MoveSpeed = m_moveSpeedStart;
         MoveSpeed *= 1.2f; // + 20% 증가
         transform.GetChild(4).gameObject.SetActive(true); // 버프 이펙트 활성화
     }
@@ -165,7 +165,9 @@ public class Player : Character
     {
         Initialize_Character();
 
-        m_hpMax = 10f;
+        m_moveSpeed = m_moveSpeedStart;
+
+        m_hpMax = 30f;
         m_hp = m_hpMax;
         for(int i = 0; i < m_hpSliders.Length; ++i)
         {
@@ -177,7 +179,7 @@ public class Player : Character
         m_hpSlider.Set_Slider(m_hp);
 
         // 쉴드
-        m_shieldMax = 20f;
+        m_shieldMax = 10f;
         m_shield = 0;
         for (int i = 0; i < m_shieldSliders.Length; ++i)
         {
@@ -198,8 +200,6 @@ public class Player : Character
         m_staminaSlider = m_staminaSliders[0].GetComponent<UISliderOwner>();
         m_staminaSlider.Initialize();
         Set_StaminaSlider();
-
-        m_damage = 2f;
 
         m_sr = GetComponent<SpriteRenderer>();
         m_rb = GetComponent<Rigidbody2D>();

@@ -10,7 +10,7 @@ public class Mushroom : Monster
     {
         Initialize_Monster();
 
-        m_hpMax = 5f;
+        m_hpMax = 10f;
         m_hp = m_hpMax;
 
         m_speedMax = 2f;

@@ -8,6 +8,8 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private TYPE m_itemMapType;
     [SerializeField] private Sprite[] m_spriteForestImg;
     [SerializeField] private Sprite[] m_spriteMarshImg;
+
+    private bool m_isTriger = false;
     private SpriteRenderer m_sr;
 
     private void Start()
@@ -34,10 +36,13 @@ public abstract class Item : MonoBehaviour
     {
         if(collision.CompareTag("Player") == true)
         {
-            if (GameManager.Ins.Play.Player == null)
+            if (m_isTriger == true || GameManager.Ins.Play.Player == null)
                 return;
 
+            m_isTriger = true;
+
             Triger_Event();
+            GetComponent<AudioSource>().Play();
 
             //Destroy(gameObject);
             if (m_itemMapType == TYPE.TYPE_FOREST)

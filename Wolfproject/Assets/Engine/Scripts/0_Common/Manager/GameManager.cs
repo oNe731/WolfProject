@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     public PlayManager Play => (PlayManager)m_scenes[(int)SCENE.SCENE_PLAY];
 
     public string PlayerName => m_playerName;
-    public int ZenScore => m_zenScore;
-    public int ChaosScore => m_chaosScore;
+    public int ZenScore { get => m_zenScore; set => m_zenScore = value; }
+    public int ChaosScore { get => m_chaosScore; set => m_chaosScore = value; }
     public AudioSource AudioSource => m_audioSource;
 
     public static GameManager Ins => m_instance;

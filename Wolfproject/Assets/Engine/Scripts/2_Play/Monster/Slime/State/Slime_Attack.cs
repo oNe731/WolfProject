@@ -29,11 +29,12 @@ public class Slime_Attack : Slime_Base
                 m_isAttack = true;
                 if (Get_PlayerDistance() <= m_attackDistance)
                 {
+                    m_owner.Play_AudioSource("Slime_Attack", false, 2f, GameManager.Ins.Sound.EffectSound);
                     GameManager.Ins.Play.Player.Damaged_Player(m_owner.Damage);
                     GameManager.Ins.Play.Player.Start_Sturn(0.5f);
                 }
             }
-            if (animTime >= 1.0f)
+            if (m_owner.AudioSource.isPlaying == false && animTime >= 1.0f)
                 m_stateMachine.Change_State((int)Slime.STATE.ST_WAIT);
         } 
     }

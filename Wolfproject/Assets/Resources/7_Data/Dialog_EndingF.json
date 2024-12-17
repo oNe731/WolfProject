@@ -3,8 +3,25 @@
     "m_dataType": 2, // 페이드
     "dialogText": "",
     "cutSpr": "",
-    "fade" : 1 // 인
+    "fade": 1 // 인
   },
+
+  {
+    "m_dataType": 1,
+    "dialogText": "우린 더 이상 너를 무리의 일원으로 받아들일 수 없어. 너의 선택이 모두를 실망시켰단다.",
+    "cutSpr": "Cut_None"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "넌 위험한 길을 택했어. 여긴 네가 있을 곳이 아니야.",
+    "cutSpr": "Cut_None"
+  },
+  {
+    "m_dataType": 1,
+    "dialogText": "내 선택은 틀리지 않았어. 이 세상은 강한 자만이 살아남는 법이니까.",
+    "cutSpr": "Cut_None"
+  },
+
   {
     "m_dataType": 1,
     "dialogText": "아기 늑대는 홀로 모든 위험을 이겨냈지만...",

@@ -15,7 +15,12 @@ public class Slime_Hit : Slime_Base
         m_WaitTime = 0f;
         //Debug.Log("피격 시작");
         if(m_stateMachine.PreState == (int)Slime.STATE.ST_HIT)
+        {
             m_stateMachine.Change_State((int)Slime.STATE.ST_IDLE);
+            return;
+        }
+
+        m_owner.Play_AudioSource("Slime_Hit", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

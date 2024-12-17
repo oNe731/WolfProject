@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - Enemy
   - Slot
+  - Tree1
+  - Tree2
+  - Traveler
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,7 @@ public class SlimeBoss_Idle : SlimeBoss_Base
         m_waitTime = Random.Range(1f, 2f);
 
         m_owner.Animator.SetTrigger("Is_Idle");
-
+        m_owner.Play_AudioSource("KingSlime_Idle", false, 1f, GameManager.Ins.Sound.EffectSound);
         //Debug.Log("보스 아이들");
     }
 

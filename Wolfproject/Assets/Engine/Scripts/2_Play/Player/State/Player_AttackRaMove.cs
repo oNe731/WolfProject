@@ -65,7 +65,7 @@ public class Player_AttackRaMove : Player_Attack
             Projectile projectile = gameObject.GetComponent<Projectile>();
             if (projectile != null)
             {
-                projectile.Start_Projectile(m_effectPoint.position, m_owner.AttributeType, m_owner.Get_Direction(m_owner.Joystick.InputVector), m_owner.Get_Direction());
+                projectile.Start_Projectile(m_effectPoint.position, m_owner.AttributeType, m_owner.Get_Direction(m_owner.Joystick.InputVector), m_owner.Get_Direction(), 2f);
             }
         }
     }

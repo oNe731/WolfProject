@@ -13,6 +13,9 @@ public class Mushroom_Chase : Mushroom_Base
         m_owner.SpeedMax = 4f;
         m_owner.Speed = m_owner.SpeedMax / 2.5F;
         m_owner.Animator.SetTrigger("Is_Chase");
+
+        m_owner.Play_AudioSource("Mushroom_Walk", false, 1f, GameManager.Ins.Sound.EffectSound);
+        //Debug.Log("사운드 재생2");
     }
 
     public override void Update_State()

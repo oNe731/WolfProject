@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Slime_Idle : Slime_Base
 {
-
     private Vector2 m_randomPosition;
     private float m_time = 0f;
+
+    //private float m_soundTime = 0f;
 
     public Slime_Idle(StateMachine<Monster> stateMachine) : base(stateMachine)
     {
@@ -21,6 +22,8 @@ public class Slime_Idle : Slime_Base
         m_owner.Speed = m_owner.SpeedMax;
         m_owner.Animator.SetTrigger("Is_Idle");
         //Debug.Log("슬라임 아이들");
+
+        m_owner.Play_AudioSource("Slime_Idle", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()
@@ -50,14 +53,27 @@ public class Slime_Idle : Slime_Base
                 m_owner.SpriteRenderer.flipX = true;
             else
                 m_owner.SpriteRenderer.flipX = false;
+
+            //Play_Sound();
         }
     }
 
     public override void Exit_State()
     {
+        m_owner.Stop_AudioSource();
     }
 
     public override void OnDrawGizmos()
     {
     }
+
+    //protected void Play_Sound()
+    //{
+    //    m_soundTime += Time.deltaTime;
+    //    if (m_soundTime >= 1f)
+    //    {
+    //        m_soundTime = 0f;
+    //        m_owner.Play_AudioSource("Slime_Idle", false, 1f, GameManager.Ins.Sound.EffectSound);
+    //    }
+    //}
 }

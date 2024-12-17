@@ -30,6 +30,7 @@ public class SlimeBoss_Chase : SlimeBoss_Base
         m_owner.Speed = m_owner.SpeedMax;
 
         m_owner.Animator.SetTrigger("Is_Chase");
+        m_owner.Play_AudioSource("KingSlime_Move", false, 1f, GameManager.Ins.Sound.EffectSound);
 
         m_jumpTimer = m_walkDuration; // 처음엔 걷기부터 시작
 

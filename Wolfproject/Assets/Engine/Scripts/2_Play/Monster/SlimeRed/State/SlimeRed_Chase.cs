@@ -14,6 +14,8 @@ public class SlimeRed_Chase : SlimeRed_Base
     {
         m_time = 0f;
         m_owner.Animator.SetTrigger("Is_Chase");
+
+        m_owner.Play_AudioSource("Slime_Move", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

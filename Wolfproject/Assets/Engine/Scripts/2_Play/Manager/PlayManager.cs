@@ -66,9 +66,29 @@ public class PlayManager : ScenesManager
         // NPC
         m_effect.Add("Npc_Tree", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/3_Npc/TreeTalk"));
 
+        // ∏ÛΩ∫≈Õ
+        m_effect.Add("Slime_Idle",   GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Slime/idle"));
+        m_effect.Add("Slime_Move",   GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Slime/Move"));
+        m_effect.Add("Slime_Attack", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Slime/Attack"));
+        m_effect.Add("Slime_Hit",    GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Slime/Hit"));
+        m_effect.Add("Slime_Death",  GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Slime/Death"));
 
+        m_effect.Add("Mushroom_Walk",   GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Mushroom/Walk"));
+        m_effect.Add("Mushroom_Attack", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Mushroom/Attack"));
+        m_effect.Add("Mushroom_Hit",    GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Mushroom/Hit"));
+        m_effect.Add("Mushroom_Death",  GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/Mushroom/Death"));
 
-        m_effect.Add("Enemy_damaged", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/Enemy/damaged"));
+        m_effect.Add("KingSlime_Idle",       GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/idle"));
+        m_effect.Add("KingSlime_Move",       GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/Move"));
+        m_effect.Add("KingSlime_GroundSlam", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/GroundSlam"));
+        m_effect.Add("KingSlime_Summon",     GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/Summon"));
+        m_effect.Add("KingSlime_Berserk",    GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/Berserk"));
+        m_effect.Add("KingSlime_PhaseShift", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/PhaseShift"));
+        m_effect.Add("KingSlime_Hit",        GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/Hit"));
+        m_effect.Add("KingSlime_Death",      GameManager.Ins.Load<AudioClip>("2_Sound/SFX/2_Monster/KingSlime/Death"));
+
+        // UI
+        m_effect.Add("UI_Button", GameManager.Ins.Load<AudioClip>("2_Sound/SFX/4_UI/Button"));
     }
 
     public override void Enter_Game()

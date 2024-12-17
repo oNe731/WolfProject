@@ -135,13 +135,13 @@ public class Player_AttackMaDash : Player_Base
         {
             Monster monster = collision.gameObject.GetComponent<Monster>();
             if (monster != null)
-                monster.Damaged_Monster(1f, true, 5f);
+                monster.Damaged_Monster(5f, true, 5f);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Monster_K"))
         {
             Monster monster = collision.gameObject.transform.parent.GetComponent<Monster>();
             if (monster != null)
-                monster.Damaged_Monster(1f, true, 5f);
+                monster.Damaged_Monster(5f, true, 5f);
         }
     }
 

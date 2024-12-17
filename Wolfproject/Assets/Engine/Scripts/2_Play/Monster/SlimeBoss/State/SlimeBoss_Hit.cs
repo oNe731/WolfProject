@@ -14,6 +14,7 @@ public class SlimeBoss_Hit : SlimeBoss_Base
     {
         m_WaitTime = 0f;
         m_owner.Animator.SetTrigger("Is_Idle");
+        m_owner.Play_AudioSource("KingSlime_Hit", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

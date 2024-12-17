@@ -28,11 +28,13 @@ public class Mushroom_Attack : Mushroom_Base
                 m_isAttack = true;
                 if (Get_PlayerDistance() <= m_attackDistance)
                 {
+                    //Debug.Log("사운드 재생1");
+                    m_owner.Play_AudioSource("Mushroom_Attack", false, 2f, GameManager.Ins.Sound.EffectSound);
                     GameManager.Ins.Play.Player.Damaged_Player(m_owner.Damage);
                     GameManager.Ins.Play.Player.Start_Sturn(0.5f);
                 }
             }
-            if (animTime >= 1.0f)
+            if (m_owner.AudioSource.isPlaying == false && animTime >= 1.0f)
                 m_stateMachine.Change_State((int)Mushroom.STATE.ST_WAIT);
         }
     }

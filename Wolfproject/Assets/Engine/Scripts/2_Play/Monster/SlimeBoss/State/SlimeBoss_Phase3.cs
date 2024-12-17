@@ -16,6 +16,7 @@ public class SlimeBoss_Phase3 : SlimeBoss_Base
     {
         m_stateTime = 0f;
         m_owner.Animator.SetTrigger("Is_Chase");
+        m_owner.Play_AudioSource("KingSlime_Move", false, 1f, GameManager.Ins.Sound.EffectSound);
 
         // 이동속도가 매우 빨라짐
         m_owner.SpeedMax = 5f;

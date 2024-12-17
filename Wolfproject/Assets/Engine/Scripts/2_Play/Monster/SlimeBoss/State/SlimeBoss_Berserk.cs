@@ -15,6 +15,7 @@ public class SlimeBoss_Berserk : SlimeBoss_Base
     {
         m_stateCount++;
         m_owner.Animator.SetTrigger("Is_Conversion");
+        m_owner.Play_AudioSource("KingSlime_Berserk", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

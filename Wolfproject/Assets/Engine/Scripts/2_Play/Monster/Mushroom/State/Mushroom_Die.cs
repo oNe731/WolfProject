@@ -14,6 +14,9 @@ public class Mushroom_Die : Mushroom_Base
     {
         m_owner.Rigidbody2D.velocity = Vector2.zero;
         m_owner.Animator.SetTrigger("Is_Dead");
+
+        m_owner.Play_AudioSource("Mushroom_Death", false, 1f, GameManager.Ins.Sound.EffectSound);
+        //Debug.Log("사운드 재생3");
     }
 
     public override void Update_State()

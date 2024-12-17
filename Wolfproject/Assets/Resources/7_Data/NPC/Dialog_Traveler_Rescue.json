@@ -1,6 +1,27 @@
 [
   {
+    "dataType": 1,
     "profileSpr": "Portrait_Player",
     "dialogText": "걱정 마. 널 여기서 꺼내 줄게."
+  },
+  {
+    "dataType": 1,
+    "profileSpr": "Portrait_NPC_Happy",
+    "dialogText": "고마워... 정말 고마워!\n내가 널 어떻게 든 돕겠어."
+  },
+  {
+    "dataType": 3, // 슬라임들이 플레이어에게 덤비기 시작
+    "profileSpr": "",
+    "dialogText": ""
+  },
+  { // 슬라임들 전부 죽였을 시 다음 다이얼로그 출력
+    "dataType": 1,
+    "profileSpr": "Portrait_NPC_Happy",
+    "dialogText": "이 세상에 아직도 착한 존재가 있다는 걸 알았어.\n꼭 네 부모님을 찾길 바라."
+  },
+  {
+    "dataType": 5, // 여행자 위치에 포션3개 생성
+    "profileSpr": "",
+    "dialogText": ""
   }
 ]

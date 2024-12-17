@@ -1,13 +1,22 @@
 [
   {
+    "dataType": 1,
     "profileSpr": "Portrait_Player",
     "dialogText": "살아남는 건 각자의 몫이야."
   },
   {
-    "profileSpr": "Portrait_Player",
-    "dialogText": "제발... 날 두고 가지 마! 이렇게 죽고 싶지 않아..."
+    "dataType": 1,
+    "profileSpr": "Portrait_NPC_Sad",
+    "dialogText": "제발... 날 두고 가지 마!\n이렇게 죽고 싶지 않아..."
   },
   {
-    // 여행자 삭제
+    "dataType": 4, // 페이드 아웃 후 슬라임 흔적으로 여행자 근처에 뿌려놓고 여행자 및 몬스터 삭제 -> 페이드 인
+    "profileSpr": "",
+    "dialogText": ""
+  },
+  {
+    "dataType": 1,
+    "profileSpr": "Portrait_Player",
+    "dialogText": "내가 할 수 있는 건 없었어.\n이건 그저 자연의 이치일 뿐이야."
   }
 ]

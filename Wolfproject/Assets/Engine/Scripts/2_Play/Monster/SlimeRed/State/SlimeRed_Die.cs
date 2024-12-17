@@ -14,6 +14,8 @@ public class SlimeRed_Die : SlimeRed_Base
     {
         m_owner.Rigidbody2D.velocity = Vector2.zero;
         m_owner.Animator.SetTrigger("Is_Dead");
+
+        m_owner.Play_AudioSource("Slime_Death", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

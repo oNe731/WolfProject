@@ -14,7 +14,7 @@ public class SlimeBoss : Monster
     {
         Initialize_Monster();
 
-        m_hpMax = 10f;
+        m_hpMax = 50f;
         m_hp = m_hpMax;
 
         m_speedMax = 2f;

@@ -17,6 +17,7 @@ public class SlimeBoss_Phase1 : SlimeBoss_Base
         m_nextPhase = Random.Range(0, 2);
 
         m_owner.Animator.SetTrigger("Is_Conversion");
+        m_owner.Play_AudioSource("KingSlime_PhaseShift", false, 1f, GameManager.Ins.Sound.EffectSound);
         //Debug.Log("보스 페이즈1");
     }
 

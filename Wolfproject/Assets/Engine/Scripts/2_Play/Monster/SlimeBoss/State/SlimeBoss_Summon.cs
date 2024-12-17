@@ -22,7 +22,7 @@ public class SlimeBoss_Summon : SlimeBoss_Base
         m_damageTime = 0.5f;
         m_createMonster = false;
         m_owner.Animator.SetTrigger("Is_Summon");
-
+        m_owner.Play_AudioSource("KingSlime_Summon", false, 1f, GameManager.Ins.Sound.EffectSound);
         Debug.Log("자폭 슬라임 소환");
     }
 

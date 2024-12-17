@@ -10,6 +10,8 @@ public class Player_AttackNear : Player_Attack
     {
         m_coolTime = 0f;
         m_animationName = "IsAttackNear";
+
+        m_damage = 2f;
     }
 
     public override void Enter_State()

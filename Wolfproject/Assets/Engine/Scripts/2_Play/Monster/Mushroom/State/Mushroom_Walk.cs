@@ -27,6 +27,8 @@ public class Mushroom_Walk : Mushroom_Base
 
         m_owner.Animator.SetTrigger("Is_Walk");
         //Debug.Log("버섯 아이들");
+        //m_owner.Play_AudioSource("Mushroom_Walk", false, 1f, GameManager.Ins.Sound.EffectSound);
+        //Debug.Log("사운드 재생6");
     }
 
     public override void Update_State()

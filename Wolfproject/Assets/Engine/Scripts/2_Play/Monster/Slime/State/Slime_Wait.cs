@@ -17,6 +17,8 @@ public class Slime_Wait : Slime_Base
         m_waitTime = Random.Range(1f, 1.5f);
         m_owner.Animator.SetTrigger("Is_Idle");
         //Debug.Log("슬라임 공격 후 대기");
+
+        m_owner.Play_AudioSource("Slime_Idle", false, 1f, GameManager.Ins.Sound.EffectSound);
     }
 
     public override void Update_State()

@@ -26,6 +26,7 @@ public class SlimeBoss_Walk : SlimeBoss_Base
         m_owner.Speed = m_owner.SpeedMax;
 
         m_owner.Animator.SetTrigger("Is_Walk");
+        m_owner.Play_AudioSource("KingSlime_Move", false, 1f, GameManager.Ins.Sound.EffectSound);
 
         //Debug.Log("º¸½º °È±â");
     }

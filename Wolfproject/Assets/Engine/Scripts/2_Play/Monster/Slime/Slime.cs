@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Slime : Monster
 {
-    public enum STATE { ST_IDLE, ST_CHASE, ST_ATTACK, ST_WAIT, ST_HIT, ST_BERSERK, ST_DIE, ST_END }
+    public enum STATE { ST_IDLE, ST_CHASE, ST_ATTACK, ST_WAIT, ST_HIT, ST_BERSERK, ST_DIE, ST_DIALOG, ST_END }
 
     private void Start()
     {
         Initialize_Monster();
 
-        m_hpMax = 5f;
+        m_hpMax = 7f;
         m_hp = m_hpMax;
 
         m_speedMax = 2f;
@@ -30,14 +30,19 @@ public class Slime : Monster
         states.Add(new Slime_Hit(m_stateMachine));     // 4
         states.Add(new Slime_Berserk(m_stateMachine)); // 5
         states.Add(new Slime_Die(m_stateMachine));     // 6
-        m_stateMachine.Initialize_State(states, (int)STATE.ST_IDLE);
+        states.Add(new Slime_Dialog(m_stateMachine));  // 7
+
+        if (m_startStateIndex != (int)STATE.ST_IDLE)
+            m_stateMachine.Initialize_State(states, m_startStateIndex);
+        else
+            m_stateMachine.Initialize_State(states, (int)STATE.ST_IDLE);
     }
 
     private void Update()
     {
         if (GameManager.Ins.IsGame == false)
         {
-            if (m_stateMachine.CurState != (int)STATE.ST_IDLE)
+            if (m_stateMachine.CurState != (int)STATE.ST_IDLE && m_stateMachine.CurState != (int)STATE.ST_DIALOG)
                 m_stateMachine.Change_State((int)STATE.ST_IDLE);
             return;
         }

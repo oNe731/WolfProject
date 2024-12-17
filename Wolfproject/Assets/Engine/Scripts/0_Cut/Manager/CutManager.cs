@@ -26,6 +26,8 @@ public class CutManager : ScenesManager
 
         m_cutSpr.Add("Cut_Ef1", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Ef1"));
         m_cutSpr.Add("Cut_Ef2", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_Ef2"));
+
+        m_cutSpr.Add("Cut_None", GameManager.Ins.Load<Sprite>("1_Graphic/UI/Cut/Cut_None"));
     }
 
     public override void Enter_Game()
